@@ -17,6 +17,8 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 :root[data-theme="light"]{color-scheme:light}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+html,body{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar,*::-webkit-scrollbar{display:none;width:0;height:0}
 body{margin:0;color:var(--ink);font:400 16px/1.5 "Inter",system-ui,sans-serif;background:var(--bg);
  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px),radial-gradient(ellipse at 50% -10%,var(--glow),transparent 60%);
  background-size:36px 36px,36px 36px,100% 100%;background-attachment:fixed}
