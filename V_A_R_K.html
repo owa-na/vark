@@ -728,6 +728,17 @@ li:hover{background:color-mix(in srgb,var(--hi) 55%,transparent)}li.done:hover{b
 @property --sp{syntax:"<percentage>";inherits:false;initial-value:50%}
 #reco .gg-split{--sp:50%;transition:--sp .3s;background:linear-gradient(90deg,var(--cy2) 0%,var(--cy) calc(var(--sp) - 22%),color-mix(in srgb,#fff 38%,color-mix(in srgb,var(--cy) 50%,var(--am))) var(--sp),var(--am) calc(var(--sp) + 22%),color-mix(in srgb,var(--am) 65%,#ff6a3d) 100%)}
 #reco .gg-split .o,#reco .gg-split .t{background:none}
+/* --- Jauge : graduations centrées pile sous le curseur, style HUD --- */
+#reco .rc-gauge{--in:9%;gap:12px}
+#reco .gg-rng{width:calc(100% - 2*var(--in));margin:6px var(--in) 0;height:24px}
+#reco .gg-rng::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--cy2),var(--cy) 38%,color-mix(in srgb,var(--cy) 40%,var(--am)) 72%,var(--am));box-shadow:0 0 12px var(--glow)}
+#reco .gg-rng::-moz-range-track{height:4px;border-radius:2px;background:linear-gradient(90deg,var(--cy2),var(--cy) 38%,color-mix(in srgb,var(--cy) 40%,var(--am)) 72%,var(--am));box-shadow:0 0 12px var(--glow)}
+#reco .gg-ticks{position:relative;display:block;height:2.7em;margin:-4px var(--in) 2px;font:600 clamp(.56rem,.44rem + .55vw,.72rem)/1.3 "Inter",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+#reco .gg-ticks span,#reco .gg-ticks span:first-child,#reco .gg-ticks span:last-child{position:absolute;top:12px;left:calc(var(--i)*25%);width:22%;transform:translateX(-50%);text-align:center;text-wrap:balance;color:var(--mut);transition:color .25s,text-shadow .25s}
+#reco .gg-ticks span::before{content:"";position:absolute;left:50%;top:-10px;width:1px;height:7px;background:color-mix(in srgb,var(--cy) 40%,var(--line));transition:background .25s,height .25s,box-shadow .25s}
+#reco .gg-ticks span:nth-child(1){--i:0}#reco .gg-ticks span:nth-child(2){--i:1}#reco .gg-ticks span:nth-child(3){--i:2}#reco .gg-ticks span:nth-child(4){--i:3}#reco .gg-ticks span:nth-child(5){--i:4}
+#reco .gg-ticks span.on{color:var(--cy);text-shadow:0 0 10px var(--glow)}
+#reco .gg-ticks span.on::before{background:var(--cy);height:9px;box-shadow:0 0 8px var(--cy)}
 </style>
 </head>
 <body>
@@ -870,6 +881,7 @@ const P=[
 ["What If...?",2021,"26 ép. · ~33min",7.4,"Le Gardien explore des univers alternatifs où des événements clés du MCU tournent différemment. Cette anthologie animée réinvente des moments-clés du MCU, avec des versions inattendues de héros bien connus."],
 ["Hawkeye",2021,"6 ép. · ~45min",7.6,"Clint Barton forme Kate Bishop à l'archerie tout en affrontant les ennemis de son passé de Ronin. Une série de Noël légère, où Clint transmet le flambeau à Kate Bishop tout en réglant les comptes de son passé."],
 ["Moon Knight",2022,"6 ép. · ~50min",7.7,"Steven Grant découvre qu'il partage son corps avec un mercenaire aux ordres du dieu égyptien Khonshu. Une série qui mêle mythologie égyptienne et trouble dissociatif, autour d'un héros dont l'esprit est partagé."],
+["Ms. Marvel",2022,"6 ép. · ~50min",6.2,"Kamala Khan, adolescente de Jersey City fan des Avengers, découvre qu'elle possède des pouvoirs grâce à un mystérieux bracelet. Une série pleine d'humour et de fraîcheur sur la jeunesse, la famille et l'héritage, qui prépare l'arrivée de Kamala dans The Marvels."],
 ["Werewolf by Night (spécial)",2022,"1 ép. · 54min",7.6,"Des chasseurs de monstres s'affrontent lors d'une compétition macabre pour hériter d'une relique. Un hommage aux films d'horreur classiques, en noir et blanc, sur une chasse aux monstres dans un manoir."],
 ["Agatha All Along",2024,"9 ép. · ~40min",7.3,"Agatha Harkness rassemble un groupe de sorcières pour parcourir la Route des Sorcières et retrouver ses pouvoirs. Agatha et une bande de sorcières empruntent la Route des Sorcières, un chemin magique semé d'épreuves."],
 ["Daredevil : Born Again",2025,"17 ép. · ~50min",7.8,"Matt Murdock reprend le costume de Daredevil face à l'ascension politique de Wilson Fisk, devenu maire. La série reprend le duel entre Matt Murdock et Wilson Fisk, désormais maire de New York, avec un ton plus politique."],
@@ -936,7 +948,7 @@ function info(dur){
  m=dur.match(/^(\d+) ép\. · ~?(\d+)min$/);
  const n=+m[1],a=+m[2];return{series:true,n,avg:a,total:n*a};
 }
-const MO=["Captain America : First Avenger","Captain Marvel","Iron Man","Iron Man 2","L'Incroyable Hulk","Thor","Avengers","Iron Man 3","Thor : Le Monde des ténèbres","Captain America : Le Soldat de l'hiver","Les Gardiens de la Galaxie","Les Gardiens de la Galaxie Vol. 2","Daredevil (Netflix)","Jessica Jones","Avengers : L'Ère d'Ultron","Ant-Man","The Punisher","Luke Cage","Iron Fist","Captain America : Civil War","Black Widow","Black Panther","Spider-Man : Homecoming","Doctor Strange","Thor : Ragnarok","Ant-Man et la Guêpe","Avengers : Infinity War","Avengers : Endgame","WandaVision","Shang-Chi et la Légende des Dix Anneaux","Falcon et le Soldat de l'hiver","Spider-Man : Far From Home","Loki","What If...?","Les Éternels","Spider-Man : No Way Home","Hawkeye","Moon Knight","Doctor Strange in the Multiverse of Madness","Thor : Love and Thunder","Werewolf by Night (spécial)","Black Panther : Wakanda Forever","Ironheart","Les Gardiens de la Galaxie Vol. 3","Ant-Man et la Guêpe : Quantumania","The Marvels","Deadpool & Wolverine","Agatha All Along","Daredevil : Born Again","Captain America : Brave New World","Thunderbolts*","Les Quatre Fantastiques : Premiers pas","Wonder Man","Spider-Man : Brand New Day","Avengers : Doomsday (à venir)"];
+const MO=["Captain America : First Avenger", "Captain Marvel", "Iron Man", "Iron Man 2", "L'Incroyable Hulk", "Thor", "Avengers", "Iron Man 3", "Thor : Le Monde des ténèbres", "Captain America : Le Soldat de l'hiver", "Les Gardiens de la Galaxie", "Les Gardiens de la Galaxie Vol. 2", "Daredevil (Netflix)", "Jessica Jones", "Avengers : L'Ère d'Ultron", "Ant-Man", "The Punisher", "Luke Cage", "Iron Fist", "Captain America : Civil War", "Black Widow", "Black Panther", "Spider-Man : Homecoming", "Doctor Strange", "Thor : Ragnarok", "Ant-Man et la Guêpe", "Avengers : Infinity War", "Avengers : Endgame", "WandaVision", "Shang-Chi et la Légende des Dix Anneaux", "Falcon et le Soldat de l'hiver", "Spider-Man : Far From Home", "Loki", "What If...?", "Les Éternels", "Spider-Man : No Way Home", "Hawkeye", "Moon Knight", "Doctor Strange in the Multiverse of Madness", "Thor : Love and Thunder", "Werewolf by Night (spécial)", "Black Panther : Wakanda Forever", "Ms. Marvel", "Ironheart", "Les Gardiens de la Galaxie Vol. 3", "Ant-Man et la Guêpe : Quantumania", "The Marvels", "Deadpool & Wolverine", "Agatha All Along", "Daredevil : Born Again", "Captain America : Brave New World", "Thunderbolts*", "Les Quatre Fantastiques : Premiers pas", "Wonder Man", "Spider-Man : Brand New Day", "Avengers : Doomsday (à venir)"];
 const GRP=new Set(["Avengers","Avengers : L'Ère d'Ultron","Captain America : Civil War","Les Gardiens de la Galaxie","Les Gardiens de la Galaxie Vol. 2","Les Gardiens de la Galaxie Vol. 3","Avengers : Infinity War","Avengers : Endgame","Les Éternels","The Marvels","Deadpool & Wolverine","Thunderbolts*","Les Quatre Fantastiques : Premiers pas","Avengers : Doomsday (à venir)","X-Men","X-Men 2","X-Men : L'Affrontement final","X-Men : Le Commencement","X-Men : Days of Future Past","X-Men : Apocalypse","X-Men : Dark Phoenix","Les Nouveaux Mutants","Les 4 Fantastiques","Les 4 Fantastiques et le Surfer d'argent","Les Quatre Fantastiques (Fant4stic)","Falcon et le Soldat de l'hiver","What If...?","Agatha All Along","The Defenders"]);
 // saisons : liste de titres d'épisodes (null = titre pas encore renseigné) ou nombre d'épisodes
 const SE={
@@ -947,6 +959,7 @@ const SE={
 "Hawkeye":[["Never Meet Your Heroes", "Hide and Seek", "Echoes", "Partners, Am I Right?", "Ronin", "So This Is Christmas?"]],
 "Ironheart":[["Take Me Home", "Will the Real Natalie Please Stand Up?", "We in Danger, Girl", "Bad Magic", "Karma's a Glitch", "The Past Is the Past"]],
 "Moon Knight":[["The Goldfish Problem", "Summon the Suit", "The Friendly Type", "The Tomb", "Asylum", "Gods and Monsters"]],
+"Ms. Marvel":[["Generation Why", "Crushed", "Destined", "Seeing Red", "Time and Again", "No Normal"]],
 "Agatha All Along":[["Seekest Thou the Road", "Circle Sewn with Fate / Unlock Thy Hidden Gate", "Through Many Miles / Of Tricks and Trials", "If I Can't Reach You / Let My Song Teach You", "Darkest Hour / Wake Thy Power", "Familiar by Thy Side", "Death's Hand in Mine", "Follow Me My Friend, to Glory at the End", "Maiden Mother Crone"]],
 "Daredevil : Born Again":[["Heaven's Half Hour", "Optics", "The Hollow of His Hand", "Sic Semper Systema", "With Interest", "Excessive Force", "Art for Art's Sake", "Isle of Joy", "Straight to Hell"], ["The Northern Star", "Shoot the Moon", "The Scales & the Sword", "Gloves Off", "The Grand Design", "Requiem", "The Hateful Darkness", "The Southern Cross"]],
 "Daredevil (Netflix)":[["Into the Ring", "Cut Man", "Rabbit in a Snowstorm", "In the Blood", "World on Fire", "Condemned", "Stick", "Shadows in the Glass", "Speak of the Devil", "Nelson v. Murdock", "The Path of the Righteous", "The Ones We Leave Behind", "Daredevil"], ["Bang", "Dogs to a Gunfight", "New York's Finest", "Penny and Dime", "Kinbaku", "Regrets Only", "Semper Fidelis", "Guilty as Sin", "Seven Minutes in Heaven", "The Man in the Box", ".380", "The Dark at the End of the Tunnel", "A Cold Day in Hell's Kitchen"], ["Resurrection", "Please", "No Good Deed", "Blindsided", "The Perfect Game", "The Devil You Know", "Aftermath", "Upstairs/Downstairs", "Revelations", "Karen", "Reunion", "One Last Shot", "A New Napkin"]],
@@ -964,7 +977,11 @@ const SE={
 };
 // notes par épisode (avis des fans, IMDb ; Spider-Noir : TMDB) : "saison.épisode"
 const R={"WandaVision": {"1.1": 7.3, "1.2": 7.6, "1.3": 8.0, "1.4": 8.7, "1.5": 8.9, "1.6": 8.7, "1.7": 8.3, "1.8": 8.9, "1.9": 8.3}, "Falcon et le Soldat de l'hiver": {"1.1": 7.5, "1.2": 7.7, "1.3": 7.8, "1.4": 8.6, "1.5": 7.8, "1.6": 7.7}, "Loki": {"1.1": 8.6, "1.2": 8.7, "1.3": 7.7, "1.4": 9.0, "1.5": 8.9, "1.6": 8.6, "2.1": 8.2, "2.2": 7.6, "2.3": 7.7, "2.4": 8.6, "2.5": 8.7, "2.6": 9.5}, "What If...?": {"1.1": 7.0, "1.2": 7.7, "1.3": 7.8, "1.4": 8.9, "1.5": 7.7, "1.6": 6.6, "1.7": 6.4, "1.8": 8.9, "1.9": 8.4, "2.1": 6.9, "2.2": 7.2, "2.3": 6.6, "2.4": 7.2, "2.5": 7.1, "2.6": 7.4, "2.7": 7.8, "2.8": 7.8, "2.9": 7.4, "3.1": 5.6, "3.2": 5.5, "3.3": 6.6, "3.4": 5.7, "3.5": 6.2, "3.6": 6.2, "3.7": 6.7, "3.8": 6.4}, "Hawkeye": {"1.1": 7.5, "1.2": 7.6, "1.3": 8.2, "1.4": 8.0, "1.5": 8.4, "1.6": 8.0}, "Moon Knight": {"1.1": 8.1, "1.2": 7.9, "1.3": 7.5, "1.4": 8.1, "1.5": 8.8, "1.6": 7.8}, "Werewolf by Night (spécial)": {"1.1": 7.6}, "Agatha All Along": {"1.1": 7.2, "1.2": 7.5, "1.3": 7.5, "1.4": 7.2, "1.5": 7.7, "1.6": 8.0, "1.7": 9.0, "1.8": 8.3, "1.9": 7.8}, "Daredevil : Born Again": {"1.1": 8.5, "1.2": 8.3, "1.3": 8.5, "1.4": 8.2, "1.5": 8.0, "1.6": 8.7, "1.7": 8.0, "1.8": 8.9, "1.9": 8.8, "2.1": 8.2, "2.2": 7.9, "2.3": 8.7, "2.4": 9.4, "2.5": 9.0, "2.6": 9.0, "2.7": 8.9, "2.8": 9.6}, "Wonder Man": {"1.1": 7.5, "1.2": 7.4, "1.3": 7.6, "1.4": 7.5, "1.5": 7.6, "1.6": 7.7, "1.7": 7.9, "1.8": 8.3}, "Daredevil (Netflix)": {"1.1": 8.4, "1.2": 8.9, "1.3": 8.2, "1.4": 8.6, "1.5": 8.7, "1.6": 8.9, "1.7": 8.5, "1.8": 8.9, "1.9": 9.1, "1.10": 8.4, "1.11": 8.7, "1.12": 8.6, "1.13": 9.3, "2.1": 8.8, "2.2": 8.6, "2.3": 9.4, "2.4": 9.4, "2.5": 8.1, "2.6": 8.4, "2.7": 8.5, "2.8": 9.0, "2.9": 9.4, "2.10": 9.0, "2.11": 8.6, "2.12": 8.8, "2.13": 9.1, "3.1": 8.2, "3.2": 8.5, "3.3": 8.4, "3.4": 9.5, "3.5": 8.8, "3.6": 9.5, "3.7": 8.7, "3.8": 9.0, "3.9": 9.1, "3.10": 8.6, "3.11": 9.1, "3.12": 9.3, "3.13": 9.6}, "Jessica Jones": {"1.1": 7.9, "1.2": 7.9, "1.3": 8.1, "1.4": 7.9, "1.5": 8.3, "1.6": 8.1, "1.7": 8.4, "1.8": 8.8, "1.9": 9.0, "1.10": 8.6, "1.11": 8.0, "1.12": 8.3, "1.13": 8.6, "2.1": 7.4, "2.2": 7.4, "2.3": 7.6, "2.4": 7.6, "2.5": 7.7, "2.6": 7.6, "2.7": 8.2, "2.8": 7.5, "2.9": 7.6, "2.10": 7.5, "2.11": 8.2, "2.12": 7.6, "2.13": 7.8, "3.1": 7.4, "3.2": 7.1, "3.3": 7.3, "3.4": 7.5, "3.5": 7.6, "3.6": 7.6, "3.7": 8.0, "3.8": 8.3, "3.9": 7.6, "3.10": 7.6, "3.11": 7.5, "3.12": 8.3, "3.13": 8.0}, "Luke Cage": {"1.1": 7.6, "1.2": 8.0, "1.3": 8.1, "1.4": 8.3, "1.5": 7.8, "1.6": 7.9, "1.7": 8.3, "1.8": 7.9, "1.9": 7.6, "1.10": 7.7, "1.11": 8.1, "1.12": 8.0, "1.13": 7.7, "2.1": 7.0, "2.2": 7.1, "2.3": 7.2, "2.4": 7.1, "2.5": 7.3, "2.6": 7.6, "2.7": 7.6, "2.8": 7.3, "2.9": 7.6, "2.10": 8.3, "2.11": 7.6, "2.12": 7.9, "2.13": 7.5}, "Iron Fist": {"1.1": 7.3, "1.2": 7.4, "1.3": 7.5, "1.4": 7.7, "1.5": 7.4, "1.6": 7.7, "1.7": 7.5, "1.8": 7.2, "1.9": 7.3, "1.10": 7.6, "1.11": 7.1, "1.12": 7.8, "1.13": 7.3, "2.1": 7.1, "2.2": 7.1, "2.3": 7.2, "2.4": 7.4, "2.5": 7.4, "2.6": 7.5, "2.7": 7.0, "2.8": 7.2, "2.9": 7.7, "2.10": 7.5}, "The Defenders": {"1.1": 7.3, "1.2": 7.7, "1.3": 8.7, "1.4": 8.3, "1.5": 7.9, "1.6": 8.2, "1.7": 7.8, "1.8": 8.1}, "The Punisher": {"1.1": 8.5, "1.2": 8.1, "1.3": 8.3, "1.4": 8.2, "1.5": 8.6, "1.6": 8.1, "1.7": 8.6, "1.8": 8.7, "1.9": 8.9, "1.10": 9.1, "1.11": 9.2, "1.12": 9.5, "1.13": 9.2, "2.1": 8.9, "2.2": 8.1, "2.3": 8.8, "2.4": 7.6, "2.5": 8.1, "2.6": 7.8, "2.7": 8.2, "2.8": 8.0, "2.9": 8.0, "2.10": 8.6, "2.11": 8.3, "2.12": 8.7, "2.13": 9.0}, "Spider-Noir": {"1.1": 7.5, "1.2": 8.0, "1.3": 7.9, "1.4": 8.3, "1.5": 8.2, "1.6": 8.5, "1.7": 8.0, "1.8": 7.9}, "The Penguin": {"1.1": 8.7, "1.2": 8.4, "1.3": 8.9, "1.4": 9.4, "1.5": 8.6, "1.6": 8.5, "1.7": 8.9, "1.8": 9.5}, "Creature Commandos": {"1.1": 7.3, "1.2": 7.9, "1.3": 8.5, "1.4": 8.7, "1.5": 7.6, "1.6": 8.2, "1.7": 8.4}, "Peacemaker": {"1.1": 8.1, "1.2": 8.0, "1.3": 8.4, "1.4": 8.3, "1.5": 8.5, "1.6": 8.7, "1.7": 8.8, "1.8": 9.0, "2.1": 7.9, "2.2": 7.7, "2.3": 8.3, "2.4": 7.6, "2.5": 8.1, "2.6": 9.0, "2.7": 9.1, "2.8": 6.7}};
-const VO=["Captain America : First Avenger","Captain Marvel","Iron Man","Iron Man 2","L'Incroyable Hulk","Thor","Avengers","Iron Man 3","Thor : Le Monde des ténèbres","Captain America : Le Soldat de l'hiver","Les Gardiens de la Galaxie","Les Gardiens de la Galaxie Vol. 2","Daredevil (Netflix)","Jessica Jones","Avengers : L'Ère d'Ultron","Ant-Man","The Punisher","Luke Cage","Iron Fist","The Defenders","Captain America : Civil War","Black Widow","Black Panther","Spider-Man : Homecoming","Doctor Strange","Thor : Ragnarok","Ant-Man et la Guêpe","Avengers : Infinity War","Avengers : Endgame","WandaVision","Shang-Chi et la Légende des Dix Anneaux","Falcon et le Soldat de l'hiver","Spider-Man : Far From Home","Loki","What If...?","Les Éternels","Spider-Man","Spider-Man 2","Spider-Man 3","The Amazing Spider-Man","The Amazing Spider-Man : Le Destin d'un héros","Spider-Man : No Way Home","Hawkeye","Moon Knight","Doctor Strange in the Multiverse of Madness","Thor : Love and Thunder","Werewolf by Night (spécial)","Black Panther : Wakanda Forever","Ironheart","Les Gardiens de la Galaxie Vol. 3","Ant-Man et la Guêpe : Quantumania","The Marvels","X-Men : Le Commencement","X-Men : Days of Future Past","X-Men Origins : Wolverine","X-Men : Apocalypse","X-Men : Dark Phoenix","X-Men","X-Men 2","X-Men : L'Affrontement final","Wolverine : Le Combat de l'immortel","Deadpool","Deadpool 2","Les Nouveaux Mutants","Logan","Deadpool & Wolverine","Agatha All Along","Daredevil : Born Again","Captain America : Brave New World","Thunderbolts*","Les Quatre Fantastiques : Premiers pas","Wonder Man","Spider-Man : Brand New Day","Avengers : Doomsday (à venir)","Spider-Man : New Generation","Spider-Man : Across the Spider-Verse","Spider-Noir","Madame Web","Venom","Venom : Let There Be Carnage","Venom : The Last Dance","Morbius","Kraven the Hunter","Blade","Blade II","Blade : Trinity","Hulk","Daredevil","Elektra","Les 4 Fantastiques","Les 4 Fantastiques et le Surfer d'argent","Ghost Rider","Ghost Rider : L'Esprit de vengeance","Punisher : Zone de guerre","Les Quatre Fantastiques (Fant4stic)","Wonder Woman","Wonder Woman 1984","Man of Steel","Batman v Superman : L'Aube de la justice","Suicide Squad","Justice League","Zack Snyder's Justice League","Aquaman","Shazam !","Birds of Prey et la fantabuleuse histoire de Harley Quinn","The Suicide Squad","Peacemaker","Black Adam","Shazam ! La Rage des dieux","The Flash","Blue Beetle","Aquaman et le Royaume perdu","Creature Commandos","Superman (2025)","Superman","Batman","Batman Begins","The Dark Knight : Le Chevalier noir","The Dark Knight Rises","Joker","Joker : Folie à deux","The Batman","The Penguin"];
+const VO=["Captain America : First Avenger", "Captain Marvel", "Iron Man", "Iron Man 2", "L'Incroyable Hulk", "Thor", "Avengers", "Iron Man 3", "Thor : Le Monde des ténèbres", "Captain America : Le Soldat de l'hiver", "Les Gardiens de la Galaxie", "Les Gardiens de la Galaxie Vol. 2", "Daredevil (Netflix)", "Jessica Jones", "Avengers : L'Ère d'Ultron", "Ant-Man", "The Punisher", "Luke Cage", "Iron Fist", "The Defenders", "Captain America : Civil War", "Black Widow", "Black Panther", "Spider-Man : Homecoming", "Doctor Strange", "Thor : Ragnarok", "Ant-Man et la Guêpe", "Avengers : Infinity War", "Avengers : Endgame", "WandaVision", "Shang-Chi et la Légende des Dix Anneaux", "Falcon et le Soldat de l'hiver", "Spider-Man : Far From Home", "Loki", "What If...?", "Les Éternels", "Spider-Man", "Spider-Man 2", "Spider-Man 3", "The Amazing Spider-Man", "The Amazing Spider-Man : Le Destin d'un héros", "Spider-Man : No Way Home", "Hawkeye", "Moon Knight", "Doctor Strange in the Multiverse of Madness", "Thor : Love and Thunder", "Werewolf by Night (spécial)", "Black Panther : Wakanda Forever", "Ms. Marvel", "Ironheart", "Les Gardiens de la Galaxie Vol. 3", "Ant-Man et la Guêpe : Quantumania", "The Marvels", "X-Men : Le Commencement", "X-Men : Days of Future Past", "X-Men Origins : Wolverine", "X-Men : Apocalypse", "X-Men : Dark Phoenix", "X-Men", "X-Men 2", "X-Men : L'Affrontement final", "Wolverine : Le Combat de l'immortel", "Deadpool", "Deadpool 2", "Les Nouveaux Mutants", "Logan", "Deadpool & Wolverine", "Agatha All Along", "Daredevil : Born Again", "Captain America : Brave New World", "Thunderbolts*", "Les Quatre Fantastiques : Premiers pas", "Wonder Man", "Spider-Man : Brand New Day", "Avengers : Doomsday (à venir)", "Spider-Man : New Generation", "Spider-Man : Across the Spider-Verse", "Spider-Noir", "Madame Web", "Venom", "Venom : Let There Be Carnage", "Venom : The Last Dance", "Morbius", "Kraven the Hunter", "Blade", "Blade II", "Blade : Trinity", "Hulk", "Daredevil", "Elektra", "Les 4 Fantastiques", "Les 4 Fantastiques et le Surfer d'argent", "Ghost Rider", "Ghost Rider : L'Esprit de vengeance", "Punisher : Zone de guerre", "Les Quatre Fantastiques (Fant4stic)", "Wonder Woman", "Wonder Woman 1984", "Man of Steel", "Batman v Superman : L'Aube de la justice", "Suicide Squad", "Justice League", "Zack Snyder's Justice League", "Aquaman", "Shazam !", "Birds of Prey et la fantabuleuse histoire de Harley Quinn", "The Suicide Squad", "Peacemaker", "Black Adam", "Shazam ! La Rage des dieux", "The Flash", "Blue Beetle", "Aquaman et le Royaume perdu", "Creature Commandos", "Superman (2025)", "Superman", "Batman", "Batman Begins", "The Dark Knight : Le Chevalier noir", "The Dark Knight Rises", "Joker", "Joker : Folie à deux", "The Batman", "The Penguin"];
+const VOA=["Captain America : First Avenger", "X-Men : Le Commencement", "X-Men Origins : Wolverine", "X-Men : Days of Future Past", "X-Men : Apocalypse", "X-Men : Dark Phoenix", "Captain Marvel", "Blade", "X-Men", "Spider-Man", "Blade II", "Madame Web", "X-Men 2", "Daredevil", "Spider-Man 2", "Blade : Trinity", "Elektra", "Les 4 Fantastiques", "X-Men : L'Affrontement final", "Ghost Rider", "Spider-Man 3", "Les 4 Fantastiques et le Surfer d'argent", "Iron Man", "Iron Man 2", "Hulk", "L'Incroyable Hulk", "Punisher : Zone de guerre", "Thor", "Ghost Rider : L'Esprit de vengeance", "Avengers", "The Amazing Spider-Man", "Iron Man 3", "Thor : Le Monde des ténèbres", "Wolverine : Le Combat de l'immortel", "Captain America : Le Soldat de l'hiver", "The Amazing Spider-Man : Le Destin d'un héros", "Les Gardiens de la Galaxie", "Les Gardiens de la Galaxie Vol. 2", "Daredevil (Netflix)", "Jessica Jones", "Avengers : L'Ère d'Ultron", "Ant-Man", "Les Quatre Fantastiques (Fant4stic)", "The Punisher", "Luke Cage", "Iron Fist", "The Defenders", "Captain America : Civil War", "Black Widow", "Black Panther", "Spider-Man : Homecoming", "Deadpool", "Doctor Strange", "Thor : Ragnarok", "Deadpool 2", "Ant-Man et la Guêpe", "Avengers : Infinity War", "Avengers : Endgame", "WandaVision", "Falcon et le Soldat de l'hiver", "Spider-Man : Far From Home", "Venom", "Venom : Let There Be Carnage", "Spider-Man : No Way Home", "Spider-Man : New Generation", "Shang-Chi et la Légende des Dix Anneaux", "Loki", "What If...?", "Les Éternels", "Morbius", "Kraven the Hunter", "Hawkeye", "Moon Knight", "Venom : The Last Dance", "Doctor Strange in the Multiverse of Madness", "Les Quatre Fantastiques : Premiers pas", "Thor : Love and Thunder", "Spider-Man : Across the Spider-Verse", "Black Panther : Wakanda Forever", "Ms. Marvel", "Ironheart", "Les Gardiens de la Galaxie Vol. 3", "Ant-Man et la Guêpe : Quantumania", "The Marvels", "Agatha All Along", "Daredevil : Born Again", "Captain America : Brave New World", "Thunderbolts*", "Spider-Noir", "Spider-Man : Brand New Day", "Les Nouveaux Mutants", "Wonder Man", "Werewolf by Night (spécial)", "Logan", "Deadpool & Wolverine"];
+const VOA_I=new Map(VOA.map((t,i)=>[t,i]));
+/* clé d'ordre de visionnage : en vue « Tout », l'ordre mêlé VOA ; les titres non listés suivent dans l'ancien ordre, avant DC */
+const vkey=x=>{const r=VO.indexOf(x.title);if(typeof vu!=="undefined"&&vu==="all"){const a=VOA_I.get(x.title);if(a!==undefined)return a;return r>=0?1000+r:5000+x.gi*10000+x.year}return r>=0?r:1000+x.gi*10000+x.year};
 const flat=P.flatMap(([g,items],gi)=>items.map(it=>{const o={group:g,gi,title:it[0],year:it[1],dur:it[2],rating:it[3],desc:it[4],grp:GRP.has(it[0]),ord:0,...info(it[2])};
  if(o.series){o.ss=(SE[o.title]||[o.n]).map(x=>Array.isArray(x)?x:Array(x).fill(null));o.er=R[o.title]||{};}
  return o;}));
@@ -972,7 +989,7 @@ const total=flat.length;
 /* Tons : défauts par franchise + mots du synopsis ; TN_OV permet de corriger un titre à la main */
 const TN_FR=[[/captain america|first avenger/i,["épique","enquête"]],[/iron man/i,["humour","épique"]],[/\bthor\b/i,["cosmique","humour"]],[/avengers/i,["épique","humour"]],[/gardiens/i,["cosmique","humour"]],[/doctor strange/i,["mystique","cosmique"]],[/ant-man/i,["humour","familial"]],[/black panther/i,["épique","drame"]],[/spider/i,["familial","humour"]],[/deadpool/i,["déjanté","humour"]],[/x-men|wolverine|logan|mutants/i,["épique","sombre"]],[/daredevil|punisher/i,["sombre","enquête"]],[/fantastiques/i,["familial","cosmique"]],[/blade|ghost rider|venom/i,["sombre","horreur"]],[/batman|dark knight|penguin/i,["sombre","enquête"]],[/superman|man of steel/i,["épique","familial"]],[/wonder woman|aquaman|justice league/i,["épique","aventure"]],[/shazam|blue beetle/i,["humour","familial"]],[/suicide squad|birds of prey|peacemaker/i,["déjanté","humour"]]];
 const TN_KW=[["sombre",/sombre|noir|vengeance|tueur|traumatisme|folie|ténèbres|gothique|impitoyable|terroriste/i],["humour",/humour|comédie|drôle|léger|loufoque/i],["cosmique",/cosmique|galaxi|espace|extraterrestre|Thanos|titan|Kree|Skrull|stellaire|Asgard|dieu/i],["enquête",/enquête|détective|thriller|traque|polar|mystère|espion/i],["familial",/famil|adolescent|lycée|chaleureu/i],["épique",/épopée|bataille|rassemblement|guerre|invasion|saga/i],["horreur",/horreur|monstre|vampire|zombie|loup-garou|démon|fantôme/i],["mystique",/magie|magique|mystique|sorcier|sorcell|multivers/i],["déjanté",/déjanté|ultraviolent|fantabuleuse|loufoque|décalé/i]];
-const TN_OV={"Thor : Ragnarok":["humour","cosmique","déjanté"],"Avengers : Infinity War":["épique","cosmique","drame"],"Avengers : Endgame":["épique","drame","cosmique"],"Joker":["sombre","drame"],"The Batman":["sombre","enquête","drame"],"The Penguin":["sombre","drame","enquête"],"Batman Begins":["sombre","épique"],"The Dark Knight : Le Chevalier noir":["sombre","enquête","épique"],"Man of Steel":["épique","sombre"],"Superman (2025)":["épique","humour","familial"],"Creature Commandos":["déjanté","horreur","humour"],"Peacemaker":["déjanté","humour","sombre"],"The Suicide Squad":["déjanté","humour","sombre"],"Zack Snyder's Justice League":["épique","sombre"],"Moon Knight":["mystique","sombre","enquête"],"WandaVision":["mystique","drame","humour"],"Loki":["cosmique","mystique","humour"],"Werewolf by Night (spécial)":["horreur","sombre","mystique"],"Agatha All Along":["mystique","humour","horreur"],"Jessica Jones":["sombre","enquête","drame"],"Les Gardiens de la Galaxie Vol. 3":["cosmique","drame","humour"],"Deadpool & Wolverine":["déjanté","humour"],"Black Panther":["épique","drame","aventure"],"Blue Beetle":["familial","humour","aventure"]};
+const TN_OV={"Ms. Marvel":["familial","humour","aventure"],"Thor : Ragnarok":["humour","cosmique","déjanté"],"Avengers : Infinity War":["épique","cosmique","drame"],"Avengers : Endgame":["épique","drame","cosmique"],"Joker":["sombre","drame"],"The Batman":["sombre","enquête","drame"],"The Penguin":["sombre","drame","enquête"],"Batman Begins":["sombre","épique"],"The Dark Knight : Le Chevalier noir":["sombre","enquête","épique"],"Man of Steel":["épique","sombre"],"Superman (2025)":["épique","humour","familial"],"Creature Commandos":["déjanté","horreur","humour"],"Peacemaker":["déjanté","humour","sombre"],"The Suicide Squad":["déjanté","humour","sombre"],"Zack Snyder's Justice League":["épique","sombre"],"Moon Knight":["mystique","sombre","enquête"],"WandaVision":["mystique","drame","humour"],"Loki":["cosmique","mystique","humour"],"Werewolf by Night (spécial)":["horreur","sombre","mystique"],"Agatha All Along":["mystique","humour","horreur"],"Jessica Jones":["sombre","enquête","drame"],"Les Gardiens de la Galaxie Vol. 3":["cosmique","drame","humour"],"Deadpool & Wolverine":["déjanté","humour"],"Black Panther":["épique","drame","aventure"],"Blue Beetle":["familial","humour","aventure"]};
 flat.forEach(x=>{if(TN_OV[x.title]){x.tones=TN_OV[x.title];return}
  const t=[],fr=TN_FR.find(([r])=>r.test(x.title));if(fr)t.push(...fr[1]);else if(/Netflix/.test(x.group))t.push("sombre","enquête");
  const txt=x.title+" "+x.desc;TN_KW.forEach(([k,r])=>{if(r.test(txt)&&!t.includes(k))t.push(k)});
@@ -1016,7 +1033,7 @@ function makeLi(it){
  const closeRp=()=>{rp.hidden=true;mr.setAttribute("aria-expanded","false")};
  const cb=[1,2,3,4,5,6,7,8,9,10].map(n=>{const bt=el("button","chip",String(n));bt.type="button";bt.setAttribute("aria-label",n+" sur 10");bt.onclick=()=>{pr[it.title]=n;paint();save();rk();setTimeout(closeRp,450)};return bt});
  chips.append(...cb);ft.append(cap,clr);rp.append(chips,ft);
- const paint=()=>{const v=pr[it.title]||0,c=v?ratingColor(v):"var(--am)";mr.innerHTML=v?"<i>★</i><b>"+v+"</b>":"<i>☆</i><span>Noter</span>";mr.classList.toggle("set",!!v);rp.style.setProperty("--c",c);mr.style.setProperty("--c",c);cb.forEach((bt,i)=>bt.classList.toggle("on",i<v));cap.textContent=v?"Ta note : "+v+" / 10":"Touche un chiffre pour noter";clr.style.visibility=v?"visible":"hidden"};
+ const paint=()=>{const v=+pr[it.title]||0,c=v?ratingColor(v):"var(--am)";mr.innerHTML=v?"<i>★</i><b>"+v+"</b>":"<i>☆</i><span>Noter</span>";mr.classList.toggle("set",!!v);rp.style.setProperty("--c",c);mr.style.setProperty("--c",c);cb.forEach((bt,i)=>bt.classList.toggle("on",i<v));cap.textContent=v?"Ta note : "+v+" / 10":"Touche un chiffre pour noter";clr.style.visibility=v?"visible":"hidden"};
  clr.onclick=()=>{delete pr[it.title];delete po[it.title];paint();save();rk()};
  mr.onclick=()=>{rp.hidden=!rp.hidden;mr.setAttribute("aria-expanded",String(!rp.hidden))};
  paint();
@@ -1078,7 +1095,7 @@ function makeLi(it){
  sync();
  return li;
 }
-const VU=[["all","Tout"],["mcu","MCU"],["xmen","X-Men & Deadpool"],["spider","Spider-Man"],["autres","Autres Marvel"],["dc","DC"]];
+const VU=[["all","Tout"],["mcu","MCU"],["xmen","X-Men & Deadpool"],["spider","Spider-Man"],["dc","DC"]];
 const MCU_SP=new Set(["Spider-Man : Homecoming","Spider-Man : Far From Home","Spider-Man : No Way Home","Spider-Man : Brand New Day"]);
 const vcat=x=>{const g=x.group;if(g==="DC")return"dc";if(/X-Men et Deadpool/.test(g))return"xmen";if(/Spider-Man/.test(g))return MCU_SP.has(x.title)?"mcu":"spider";if(/autres films Marvel/.test(g))return"autres";return"mcu"};
 let vu="all";try{vu=localStorage.getItem("mcu_vu")||"all"}catch(e){}
@@ -1099,17 +1116,17 @@ function render(){
   });
  } else {
   const arr=flat.slice(),T=(a,b)=>a.title.localeCompare(b.title,"fr");
-  const key=x=>{const r=VO.indexOf(x.title);return r>=0?r:1000+x.gi*10000+x.year};
+  const key=vkey;
   if(sort==="chrono") arr.sort((a,b)=>a.year-b.year||T(a,b));
   else if(sort==="chrono-desc") arr.sort((a,b)=>b.year-a.year||T(a,b));
   else if(sort==="dur") arr.sort((a,b)=>(a.total??1e9)-(b.total??1e9)||T(a,b));
   else if(sort==="dur-desc") arr.sort((a,b)=>(b.total??-1)-(a.total??-1)||T(a,b));
   else if(sort==="note") arr.sort((a,b)=>(b.rating??-1)-(a.rating??-1)||T(a,b));
-  else if(sort==="vision"){arr.sort((a,b)=>key(a)-key(b)||T(a,b));if(vu!=="all"){for(let i=arr.length-1;i>=0;i--)if(vcat(arr[i])!==vu)arr.splice(i,1)}arr.forEach((x,i)=>x.ord=i+1);}
+  else if(sort==="vision"){arr.sort((a,b)=>key(a)-key(b)||T(a,b));for(let i=arr.length-1;i>=0;i--){const c=vcat(arr[i]);if(vu==="all"?c==="dc":c!==vu)arr.splice(i,1)}arr.forEach((x,i)=>x.ord=i+1);}
   else arr.sort(T);
-  if(sort==="vision")box.appendChild(el("p","jarvis","> Ordre chronologique de l'histoire (pas de la sortie en salle) : le MCU suit la timeline officielle Marvel / Disney+ (séries Netflix incluses). Les films Sony et Fox utiles sont placés juste avant ceux qui s'y rattachent. Choisis un univers ci-dessous pour ne voir que celui-là ; avec « Tout », les autres univers Marvel suivent, chacun dans son ordre interne, puis DC."));
+  if(sort==="vision")box.appendChild(el("p","jarvis","> Ordre chronologique de l'histoire (pas de la sortie en salle) : le MCU suit la timeline officielle Marvel / Disney+ (séries Netflix incluses). "+(vu==="all"?"Dans « Tout », les films et séries de tous les univers Marvel (MCU, X-Men, Spider-Man, Sony, Fox) sont mêlés dans ton ordre chronologique, puis viennent les titres non classés (DC n'apparaît que dans son onglet). Choisis un univers ci-dessous pour ne voir que celui-là.":"Les films Sony et Fox utiles sont placés juste avant ceux qui s'y rattachent. Choisis un univers ci-dessous pour ne voir que celui-là.")+""));
   if(sort==="vision"){
-   const cnt={all:flat.length};flat.forEach(x=>{const c=vcat(x);cnt[c]=(cnt[c]||0)+1});
+   const cnt={all:flat.filter(x=>vcat(x)!=="dc").length};flat.forEach(x=>{const c=vcat(x);cnt[c]=(cnt[c]||0)+1});
    const pills=el("div","rc-pills vu-pills");pills.style.margin="0 0 12px";pills.setAttribute("role","group");pills.setAttribute("aria-label","Choisir l'univers");
    VU.forEach(([k,l])=>{const b=el("button",undefined,l+" ("+(cnt[k]||0)+")");b.type="button";b.setAttribute("aria-pressed",String(k===vu));b.onclick=()=>{vu=k;try{localStorage.setItem("mcu_vu",vu)}catch(e){}render()};pills.appendChild(b)});
    box.appendChild(pills);
@@ -1142,7 +1159,7 @@ function hud(){
  if(window.VKRM){paint(L);return}
  let n=0;_tw=setInterval(()=>{paint(++n);if(n>=L)clearInterval(_tw)},26);
 }
-setInterval(hud,30000);
+setInterval(()=>{if(!document.hidden)hud()},30000);
 function upd(){
  hud();
  const k=document.querySelectorAll("#list input.m:checked").length;
@@ -1238,7 +1255,7 @@ function rk(){const a=rkAll(),swapOK=rkSort==="note",rankPos=new Map(a.map((x,i)
     else swapTie(rkSel,x.title)}}
   else if(rkSel)li.classList.add("dim");
   li.append(el("span","pos",rankPos.get(x.title)),el("span","t",x.title),el("span","fan",x.rating!=null?"fans "+x.rating.toFixed(1):""),m,g);return li};
-const T=(x,y)=>x.title.localeCompare(y.title,"fr"),key=x=>{const r=VO.indexOf(x.title);return r>=0?r:1000+x.gi*10000+x.year};
+const T=(x,y)=>x.title.localeCompare(y.title,"fr"),key=vkey;
  const grp=(name,items)=>{if(!items.length)return;const d=el("details"),sm=el("summary"),ul=el("ul");d.open=true;
   sm.append(el("span","gn",name),el("span","gc",String(items.length)));items.forEach(x=>ul.append(mk(x)));d.append(sm,ul);rank.append(d)};
  if(rkSort==="univers")P.forEach(([g])=>grp(g,a.filter(x=>x.group===g)));
@@ -1321,6 +1338,7 @@ flat.forEach(x=>{const m=bag.get(x),v={};let n2=0;for(const w in m){const val=(1
 const dot=(a,b)=>{let t=0;for(const w in a)if(b[w])t+=a[w]*b[w];return t};
 
 const MAXMISS=4;
+const maxMissG=g=>g<=.15?2:Math.round(2+28*g*g);
 /* Prérequis narratifs (directs). V.A.R.K remonte la chaîne tant que les titres ne sont pas vus. */
 const PRE={
 "Avengers":["Iron Man","Thor","Captain America : First Avenger"],
@@ -1361,7 +1379,8 @@ try{const v=localStorage.getItem("mcu_reco_d");if(v)rD=v}catch(e){}
 const DUR=[["any","Peu importe"],["105","Moins de 1 h 45"],["120","Moins de 2 h"],["150","Moins de 2 h 30"],["180","Moins de 3 h"],["mini","Une série courte (8 ép. max)"]];
 if(!DUR.some(d=>d[0]===rD))rD="any";
 try{const v=localStorage.getItem("mcu_reco_g2");if(v!==null&&!isNaN(+v))rG=clamp(+v,0,100)}catch(e){}
-const pass0=c=>rF==="all"||(rF==="marvel"&&!/^DC/.test(c.x.group))||(rF==="dc"&&/^DC/.test(c.x.group))||(rF==="film"&&!c.x.series)||(rF==="serie"&&c.x.series);
+const pass0=c=>rF==="all"||vcat(c.x)===rF;
+const LANE={mcu:"MCU",xmen:"X-Men",dc:"DC",spider:"Spider-Man",autres:"Marvel hors MCU"};
 const durOk=x=>rD==="any"||(rD==="mini"?x.series&&x.n<=8:!x.series&&x.total<+rD);
 const pass=c=>pass0(c)&&durOk(c.x)&&(!subs.size||!platOf(c.x)||subs.has(platOf(c.x)));
 
@@ -1436,23 +1455,23 @@ function model(){
  const C=core(),n=C.n,mean=C.mean;
  const rec3=Object.keys(sa).filter(t=>s[t]&&byT.has(t)).sort((u,w)=>sa[w]-sa[u]).slice(0,3).map(t=>byT.get(t)),last=rec3[0]||null;
  const conf=Math.min(1,n/6),g=clamp(rG/100*(n>=3?1:.55+.15*n),0,1);
- let L=-1;flat.forEach(x=>{if(s[x.title]&&moIdx.has(x.title))L=Math.max(L,moIdx.get(x.title))});
- const ch={},chain=gn=>ch[gn]||(ch[gn]=(()=>{const a=flat.filter(x=>x.group===gn).sort((u,w)=>u.year-w.year);let l=-1;a.forEach((x,i)=>{if(s[x.title])l=i});return{a,l}})());
+ /* ordre de visionnage : même clé que le tri « Ordre de visionnage » (VOA en vue Tout, VO sinon) */
+ const rkey=x=>{const r=VO.indexOf(x.title);return rF==="all"?(VOA_I.has(x.title)?VOA_I.get(x.title):r>=0?1000+r:5000+x.gi*10000+x.year):(r>=0?r:1000+x.gi*10000+x.year)};
+ const RK=new Map(flat.map(x=>[x.title,rkey(x)])),rkT=q=>RK.has(q)?RK.get(q):9e5;
+ const lanes={},numb={};
+ flat.forEach(x=>{const ln=vcat(x),nk=(rF==="all"&&ln!=="dc")?"mix":ln;(lanes[ln]||(lanes[ln]=[])).push(x);(numb[nk]||(numb[nk]=[])).push(x)});
+ const cmpK=(a,b)=>RK.get(a.title)-RK.get(b.title)||a.year-b.year;
+ Object.values(numb).forEach(a=>a.sort(cmpK));
+ const pend={};Object.keys(lanes).forEach(ln=>{pend[ln]=lanes[ln].filter(x=>!s[x.title]&&!dis[x.title]&&x.rating!=null).sort(cmpK)});
+ const mm0=maxMissG(g);
  const cands=flat.filter(x=>!s[x.title]&&!dis[x.title]&&x.rating!=null).map(x=>{
   const p=C.P.get(x.title);
-  let o,nextFlag=false,gap=false,miss=[],started=true,kind;
-  if(moIdx.has(x.title)){
-   const i=moIdx.get(x.title),d=i-(L+1);kind="mo";
-   if(d>=0){o=Math.exp(-d/4);nextFlag=d===0;miss=MO.filter((t,j)=>j>L&&j<i&&!s[t]&&byT.has(t))}
-   else{o=.55;gap=true}
-  }else{
-   const c=chain(x.group),i=c.a.indexOf(x),d=i-(c.l+1);kind="ch";started=c.l>=0;
-   if(d>=0){o=Math.exp(-d/2);nextFlag=d===0;miss=c.a.slice(c.l+1,i).filter(y=>!s[y.title]).map(y=>y.title)}
-   else{o=.5;gap=true}
-   if(!started)o*=.5;
-  }
+  const ln=vcat(x),lp=pend[ln],d=lp.indexOf(x),nk=(rF==="all"&&ln!=="dc")?"mix":ln,pos=numb[nk].indexOf(x)+1;
+  const started=lanes[ln].some(y=>s[y.title]),kind="vo",gap=false,nextFlag=d===0;
+  let miss=lp.slice(0,d).map(y=>y.title);
+  const o=Math.exp(-d/3);
   const hard=rS?needOf(x.title):[];
-  if(hard.length){const ms=new Set(miss);hard.forEach(q=>ms.add(q));miss=[...ms].sort((a,b)=>(moIdx.has(a)?moIdx.get(a):999)-(moIdx.has(b)?moIdx.get(b):999))}
+  if(hard.length){const ms=new Set(miss);hard.forEach(q=>ms.add(q));miss=[...ms].sort((a,b)=>rkT(a)-rkT(b))}
   const pe=x.series?(ep[x.title]||[]).length:0;
   const pl=1-Phi((6.5-p.pred)/Math.max(.6,p.spread)),tasteS=clamp(.5*(p.pred-.25*p.spread-4.5)/5+.5*pl,0,1),fanS=clamp((x.rating-5)/4,0,1);
   const mm=rM.size?x.tones.filter(k=>rM.has(k)).length:0,moodS=rM.size?Math.min(1,mm/Math.min(2,rM.size)):0;
@@ -1460,10 +1479,10 @@ function model(){
   const fat=rec3.filter(y=>FKc.get(y)===FKc.get(x)).length,fresh=!!(last&&!fat&&jac(x.tones,last.tones)<=.15&&n>=3);
   const flop=x.rating<6.2?Math.min(.24,(6.2-x.rating)*.13)*(p.pred>=7?.25:n>=3&&p.pred>=6.2?.6:1):0,gem=x.rating>=8.3&&p.pred>=6.8?.05:x.rating>=8?.025:0;
   const ex=.4+.6*g,
-   ordP=o-Math.min(.04*miss.length,.2)+.02*fanS+(kind==="mo"?.01:0),
+   ordP=o-Math.min(.04*miss.length,.2)+.02*fanS,
    tasP=.82*tasteS+.18*fanS-flop+gem+(disc?.04:0)+(fresh?.025:0)-(nextFlag?.015:.035)*fat-Math.min(.03*miss.length,.12),
    score=(1-g)*ordP+g*tasP+ex*((pe?.10:0)+(wl[x.title]?.08:0))+(rM.size?moodS*.30-(mm?0:.10):0)-Math.min(.06*(skp[x.title]||0),.18)-(hard.length?Math.min(.18,.06*hard.length):0);
-  return{x,score,pe,nextFlag,gap,miss,kind,started,far:miss.length>MAXMISS,hard,parts:{ord:o,gout:tasteS,fans:fanS,sim:p.simS,mood:moodS},flop:flop>0,gem:gem>=.05,fat,fresh,pred:p.pred,pl,spread:p.spread,lk:p.lk,lkSim:p.lkSim,disc};
+  return{x,score,pe,nextFlag,gap,miss,kind,started,far:miss.length>mm0,pos,lane:ln,hard,parts:{ord:o,gout:tasteS,fans:fanS,sim:p.simS,mood:moodS},flop:flop>0,gem:gem>=.05,fat,fresh,pred:p.pred,pl,spread:p.spread,lk:p.lk,lkSim:p.lkSim,disc};
  }).sort((u,w)=>w.score-u.score||w.x.rating-u.x.rating);
  const dOf=(t,k)=>{const j=FIDX.get(t+"|"+k);return j===undefined?0:C.fit.w[j]*VAL[j]};
  return{last,rated:C.rated,n,mean,agg:C.agg,dOf,cands,conf,bias:C.bias,sigma:C.sigma,sigmaBase:C.sigmaBase,alpha:C.alpha,nr:C.nr};
@@ -1473,7 +1492,7 @@ function why(c,M){
  const r=[],x=c.x;
  if(wl[x.title])r.push({t:"Dans ta liste À voir plus tard"});
  if(c.pe)r.push({t:"Déjà commencé : "+c.pe+"/"+x.n+" ép. vus"});
- if(c.nextFlag)r.push({t:c.kind==="mo"?"Prochain dans l'ordre de visionnage":c.started?"Suite logique de « "+x.group+" »":"Bon point d'entrée de « "+x.group+" »"});
+ if(c.nextFlag)r.push({t:c.started?"Prochain dans l'ordre de visionnage ("+(LANE[c.lane]||"")+")":"Bon point d'entrée dans l'ordre de visionnage ("+(LANE[c.lane]||"")+")"});
  else if(c.gap&&!c.hard.length)r.push({t:"Sauté en chemin : à rattraper"});
  if(rS&&PRE[x.title]&&!c.hard.length)r.push({t:"Tous les prérequis sont vus : aucun spoiler"});
  if(rM.size&&c.parts.mood>0)r.push({t:"Ambiance : "+x.tones.filter(k=>rM.has(k)).join(", ")});
@@ -1502,31 +1521,32 @@ function why(c,M){
 const rec=el("div","wrap");rec.id="reco";rank.after(rec);
 const ctl=el("div","rc-ctl");
 const pills=el("div","rc-pills");
-[["all","Tout"],["marvel","Marvel"],["dc","DC"],["film","Films"],["serie","Séries"]].forEach(([k,l])=>{const b=el("button",undefined,l);b.type="button";b.dataset.k=k;b.setAttribute("aria-pressed",String(k===rF));b.onclick=()=>{rF=k;rPick=null;pills.querySelectorAll("button").forEach(z=>z.setAttribute("aria-pressed",String(z===b)));draw()};pills.append(b)});
+[["all","Tout"],["mcu","MCU"],["dc","DC"],["xmen","X-Men"]].forEach(([k,l])=>{const b=el("button",undefined,l);b.type="button";b.dataset.k=k;b.setAttribute("aria-pressed",String(k===rF));b.onclick=()=>{rF=k;rPick=null;pills.querySelectorAll("button").forEach(z=>z.setAttribute("aria-pressed",String(z===b)));draw()};pills.append(b)});
 const mix=el("div","rc-gauge"),rg=el("input"),cap=el("p","gg-cap");
 const gh=el("div","gg-h"),gv=el("span","gg-v");gh.append(el("span","gg-t","Jauge Ordre ⇄ Goûts"),gv);
 const gp=el("div","gg-pre"),PRES=[[10,"📖 Ordre strict"],[50,"⚖ Équilibré"],[90,"♥ Mes goûts"]];
 const pbs=PRES.map(([v,l])=>{const b=el("button",undefined,l);b.type="button";b.onclick=()=>setG(v);gp.append(b);return[v,b]});
 const segO=el("i","o"),segT=el("i","t"),split=el("div","gg-split");split.append(segO,segT);
 rg.type="range";rg.min=0;rg.max=100;rg.step=5;rg.value=rG;rg.className="gg-rng";rg.setAttribute("aria-label","Équilibre entre ordre de visionnage et goûts");
-const tk=el("div","gg-ticks");["Ordre strict","Plutôt ordre","Équilibré","Plutôt goûts","Goûts"].forEach(t=>tk.append(el("span",undefined,t)));
+const tk=el("div","gg-ticks");["Ordre de visionnage","Plutôt ordre","Équilibré","Plutôt goûts","Goûts"].forEach(t=>tk.append(el("span",undefined,t)));
 const warn=el("p","gg-warn");warn.hidden=true;
 const prev=el("div","gg-prev");
 const gl=el("label","gg-guard"),gc=el("input");gc.type="checkbox";gc.checked=rS;
 gl.append(gc,el("span",undefined,"🛡 Prérequis d'abord : ne jamais proposer un titre dont il manque des films clés (évite les spoilers, ex. Endgame sans Infinity War)"));
 gc.onchange=()=>{rS=gc.checked;try{localStorage.setItem("mcu_reco_s",rS?"1":"0")}catch(e){}rPick=null;draw()};
-const GD=[[15,"Ordre strict","Je suis l'ordre de visionnage à la lettre : seule la suite logique de chaque saga passe devant. Tes goûts ne servent qu'à départager."],
-[40,"Plutôt l'ordre","La suite logique reste prioritaire. Tes goûts choisissent entre plusieurs « prochains » possibles et écartent les moins adaptés."],
-[60,"Équilibré","Un titre que tu devrais adorer peut passer avant la suite logique, mais seulement s'il ne te manque aucun prérequis important."],
-[85,"Plutôt goûts","Je cherche d'abord ce qui te plaira le plus (note estimée, ambiance). L'ordre sert surtout à éviter les gros sauts."],
-[101,"Goûts à fond","Seuls tes goûts et tes notes comptent : je peux proposer un titre loin dans la saga, en te signalant ce qu'il faut voir avant."]];
+const GD=[[15,"Ordre strict","Je suis l'ordre de visionnage à la lettre : seul le prochain titre à voir dans chaque univers passe devant. Tes goûts ne servent qu'à départager."],
+[40,"Plutôt l'ordre","L'ordre de visionnage reste prioritaire. Tes goûts choisissent entre les premiers titres à voir et écartent les moins adaptés."],
+[60,"Équilibré","Un titre que tu devrais adorer peut passer avant le prochain de l'ordre, mais seulement s'il ne te manque pas trop de titres avant."],
+[85,"Plutôt goûts","Je cherche d'abord ce qui te plaira le plus (note estimée, ambiance). L'ordre de visionnage sert surtout à éviter les gros sauts."],
+[101,"Goûts à fond","Seuls tes goûts et tes notes comptent : je peux proposer un titre très loin dans l'ordre de visionnage, en te signalant ce qu'il faut voir avant."]];
 function capT(){const g=GD.find(d=>rG<d[0]);
  gv.textContent=g[1]+" · "+(100-rG)+" / "+rG;
  segO.textContent=(100-rG)>=18?"Ordre "+(100-rG)+" %":"";segT.textContent=rG>=18?"Goûts "+rG+" %":"";
  segO.style.width=(100-rG)+"%";segT.style.width=rG+"%";
- rg.style.setProperty("--g",rG+"%");cap.textContent=g[2];
+ rg.style.setProperty("--g",rG+"%");split.style.setProperty("--sp",Math.max(8,Math.min(92,100-rG))+"%");tk.querySelectorAll("span").forEach((s,i)=>s.classList.toggle("on",i===Math.round(rG/25)));cap.textContent=g[2];
  pbs.forEach(([v,b])=>b.setAttribute("aria-pressed",String(Math.abs(rG-v)<=10&&rG!==50?Math.abs(rG-v)<=5:rG===v)))}
-function setG(v){rG=clamp(v,0,100);rg.value=rG;try{localStorage.setItem("mcu_reco_g2",rG)}catch(e){}capT();draw()}
+function setG(v){rG=clamp(v,0,100);rg.value=rG;try{localStorage.setItem("mcu_reco_g2",rG)}catch(e){}capT();drawQ()}
+var _dq;function drawQ(){clearTimeout(_dq);_dq=setTimeout(draw,70)}
 rg.oninput=()=>setG(+rg.value);
 function topAt(v){const o=rG;rG=v;let r=null;try{r=diversify(model().cands.filter(c=>pass(c)&&!c.far))[0]||null}catch(e){}rG=o;return r}
 function gaugeUpdate(M){
@@ -1550,7 +1570,8 @@ mood.append(el("p","rc-moodl","Envie de…"),mp);
 const sr=el("div","rc-mood"),sp2=el("div","rc-pills");
 sr.append(el("p","rc-moodl","📺 Mes abonnements (vide = tout afficher)"),sp2);
 PLATS.forEach(k=>{const b=el("button",undefined,k);b.type="button";b.setAttribute("aria-pressed",String(subs.has(k)));b.onclick=()=>{subs.has(k)?subs.delete(k):subs.add(k);b.setAttribute("aria-pressed",String(subs.has(k)));sv("mcu_subs",[...subs]);rPick=null;draw()};sp2.append(b)});
-ctl.append(pills,mood,dur,sr,mix);
+rM.clear();subs.clear();rD="any";
+ctl.append(pills,mix);
 const bd=el("div");rec.append(ctl,bd);
 
 /* ===== Recherche intelligente : mots, critères en langage naturel, fautes, goûts ===== */
@@ -1605,7 +1626,7 @@ const ichips=el("div","rs-chips"),sopt=el("div","rs-opt"),sug=el("div","rs-sug")
 ssel.setAttribute("aria-label","Trier les résultats");scb.type="checkbox";slb.append(scb," Inclure les titres vus");sopt.append(ssel,slb);
 sb.append(srow,ichips,sopt,sug);ctl.prepend(sb);
 const SUG=["série marvel sombre","humour moins de 2h","film DC récent","années 2010 épique","court bien noté","enquête netflix"];
-const renderSug=()=>{sug.innerHTML="";const e=!rQ.trim();sug.hidden=!e;clr.hidden=e;sopt.hidden=e;ichips.hidden=e;if(!e)return;[...rHist.map(v=>["↺ "+v,v]),...SUG.map(v=>[v,v])].slice(0,9).forEach(([l,v])=>{const b=el("button",undefined,l);b.type="button";b.onclick=()=>{inp.value=v;run()};sug.append(b)})};
+const renderSug=()=>{sug.innerHTML="";const e=!rQ.trim();sug.hidden=!e;clr.hidden=e;sopt.hidden=e;ichips.hidden=e;return;[].forEach(([l,v])=>{const b=el("button",undefined,l);b.type="button";b.onclick=()=>{inp.value=v;run()};sug.append(b)})};
 const run=()=>{rQ=inp.value;rOff=new Set();rLim=12;renderSug();draw()};
 const keep=()=>{const v=inp.value.trim();if(v.length<3)return;rHist=[v,...rHist.filter(z=>z!==v)].slice(0,5);try{localStorage.setItem("mcu_reco_h",JSON.stringify(rHist))}catch(e){}};
 let tmS;inp.oninput=()=>{clearTimeout(tmS);tmS=setTimeout(run,140)};inp.onkeydown=e=>{if(e.key==="Enter"){keep();inp.blur()}};inp.onblur=keep;
@@ -1687,7 +1708,7 @@ function draw(){
  ring.append(el("span",undefined,pc+"%"),el("small",undefined,"MATCH"));
  head.append(hl,ring);card.append(head);
  const meta=el("div","rc-meta"),fan=el("span","fan",x.rating.toFixed(1));fan.style.background=ratingBg(x.rating);
- meta.append(el("span",undefined,x.year),el("span",undefined,x.series?x.n+" ép. · ~"+x.avg+" min":x.dur),el("span",undefined,x.group),el("span",undefined,"fans"),fan);
+ meta.append(el("span",undefined,"ordre n° "+cur.pos),el("span",undefined,x.year),el("span",undefined,x.series?x.n+" ép. · ~"+x.avg+" min":x.dur),el("span",undefined,x.group),el("span",undefined,"fans"),fan);
  card.append(meta);
  const tr=el("div","tn");x.tones.forEach(k=>tr.append(el("span",undefined,k)));card.append(tr);
  if(M.n>=3){const p=el("p","rc-pred","Note que tu pourrais lui donner : ");const ql=M.nr<3?"très prudente":M.sigma<=1.1?"solide":M.sigma<=1.6?"correcte":"prudente";p.append(el("b",undefined,"≈ "+cur.pred.toFixed(1)+" / 10"),el("small",undefined," ± "+cur.spread.toFixed(1)+" · estimation "+ql));card.append(p)}
@@ -1701,7 +1722,7 @@ function draw(){
   ps.value=platOf(x);ps.onchange=()=>{ps.value?PLm[x.title]=ps.value:delete PLm[x.title];sv("mcu_plat",PLm);draw()};
   pr2.append(ps,el("small",undefined,PLm[x.title]?"choisi par toi":platOf(x)?"suggestion à vérifier selon ton pays":"renseigne-la une fois, elle sera retenue"));card.append(pr2)}
  card.append(bars(cur));
- if(cur.miss.length)card.append(el("p","rc-pre","À voir avant ("+cur.miss.length+") : "+cur.miss.slice(0,MAXMISS).join(" → ")));
+ if(cur.miss.length)card.append(el("p","rc-pre","À voir avant ("+cur.miss.length+") : "+cur.miss.slice(0,MAXMISS).join(" → ")+(cur.miss.length>MAXMISS?" …":"")));
  {const fr=M.cands.filter(c=>c.far&&pass(c)&&(M.n>=3?c.parts.gout>cur.parts.gout+.03:c.x.rating>=cur.x.rating+.3)).sort((u,w)=>w.parts.gout-u.parts.gout||w.x.rating-u.x.rating)[0];
   if(fr)card.append(el("p","rc-far","💡 « "+fr.x.title+" » "+(M.n>=3?"te plairait sans doute (≈ "+fr.pred.toFixed(1)+" / 10)":"est très apprécié ("+fr.x.rating.toFixed(1)+" chez les fans)")+", mais il manque "+fr.miss.length+" titre"+(fr.miss.length>1?"s":"")+" avant. Chemin conseillé : "+fr.miss.slice(0,3).join(" → ")+(fr.miss.length>3?" …":"")+"."))}
  card.append(el("p","rc-d",x.desc));
@@ -1745,7 +1766,7 @@ const stv=el("div","wrap");stv.id="stv";rec.after(stv);
 const lv=el("div","wrap");lv.id="lv";stv.after(lv);
 const tabL=$("tabLater");
 function drawLater(){
- const T0=(a,b)=>a.title.localeCompare(b.title,"fr"),REC=(a,b)=>(+wl[b.title]||0)-(+wl[a.title]||0)||T0(a,b),LK=x=>{const r=VO.indexOf(x.title);return r>=0?r:1000+x.gi*10000+x.year};
+ const T0=(a,b)=>a.title.localeCompare(b.title,"fr"),REC=(a,b)=>(+wl[b.title]||0)-(+wl[a.title]||0)||T0(a,b),LK=vkey;
  const LSORT={univers:(a,b)=>a.gi-b.gi||REC(a,b),vision:(a,b)=>LK(a)-LK(b)||T0(a,b),media:(a,b)=>(a.series?1:0)-(b.series?1:0)||REC(a,b),chrono:(a,b)=>a.year-b.year||T0(a,b),"chrono-desc":(a,b)=>b.year-a.year||T0(a,b),dur:(a,b)=>(a.total??1e9)-(b.total??1e9)||T0(a,b),"dur-desc":(a,b)=>(b.total??-1)-(a.total??-1)||T0(a,b),note:(a,b)=>(b.rating??-1)-(a.rating??-1)||T0(a,b),alpha:T0};
  const L=flat.filter(x=>wl[x.title]&&!s[x.title]).sort(LSORT[sort]||REC);
  const LLAB={univers:"regroupés par univers",vision:"dans l'ordre de visionnage",media:"films puis séries",chrono:"année croissante","chrono-desc":"année décroissante",dur:"du plus court au plus long","dur-desc":"du plus long au plus court",note:"mieux notés d'abord",alpha:"de A à Z"};
@@ -2031,13 +2052,6 @@ t.prepend(b)})();
 const bs=[...t.querySelectorAll("button")],sync=()=>bs.forEach(b=>{const on=b.getAttribute("aria-pressed")==="true";b.setAttribute("role","tab");b.setAttribute("aria-selected",String(on));b.tabIndex=on?0:-1});
 sync();new MutationObserver(sync).observe(t,{attributes:true,subtree:true,attributeFilter:["aria-pressed"]});
 t.addEventListener("keydown",e=>{const i=bs.indexOf(document.activeElement);if(i<0)return;const k=e.key,j=k==="ArrowRight"?(i+1)%bs.length:k==="ArrowLeft"?(i-1+bs.length)%bs.length:k==="Home"?0:k==="End"?bs.length-1:-1;if(j<0)return;e.preventDefault();bs[j].focus();bs[j].click()})})();
-</script>
-<script>
-(()=>{const R=document.getElementById("reco");if(!R)return;
-const sync=()=>{const s=R.querySelector(".gg-split"),o=s&&s.querySelector(".o");if(!o)return;
- const w=parseFloat(o.style.width);if(isNaN(w))return;const v=Math.max(8,Math.min(92,w))+"%";
- if(s.style.getPropertyValue("--sp")!==v)s.style.setProperty("--sp",v)};
-new MutationObserver(sync).observe(R,{subtree:true,childList:true,attributes:true,attributeFilter:["style"]});sync()})();
 </script>
 </body>
 </html>
