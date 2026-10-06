@@ -819,7 +819,6 @@ const P=[
 ["Ant-Man et la Guêpe : Quantumania",2023,"2h05",6.0,"La famille Lang-Van Dyne est aspirée dans le royaume quantique où règne Kang le Conquérant. Le royaume quantique devient un grand terrain d'aventures peuplé de créatures étranges, avec Kang comme figure menaçante."],
 ["Les Gardiens de la Galaxie Vol. 3",2023,"2h30",7.9,"Les Gardiens tentent de sauver Rocket de son passé traumatique face au Haut Évolutionnaire. Le film clôt l'histoire de l'équipe sur une note émouvante, et met en lumière le passé tragique de Rocket."],
 ["The Marvels",2023,"1h45",5.6,"Carol Danvers, Kamala Khan et Monica Rambeau voient leurs pouvoirs s'entremêler malgré elles. Trois héroïnes aux pouvoirs liés échangent leurs places à chaque utilisation, dans une aventure cosmique rythmée."],
-["Deadpool & Wolverine",2024,"2h08",7.6,"Deadpool recrute une version de Wolverine pour sauver son univers de l'effacement. Une aventure déjantée pleine de clins d'œil, qui mêle humour irrévérencieux et hommage aux anciens univers Marvel."],
 ["Captain America : Brave New World",2025,"1h58",5.7,"Sam Wilson, nouveau Captain America, doit déjouer un complot international visant le président. Sam Wilson y endosse le costume de Captain America, au milieu de tensions politiques et d'un complot d'envergure mondiale."],
 ["Thunderbolts*",2025,"2h07",7.4,"Une équipe d'anti-héros est envoyée en mission suicide par Valentina de Fontaine. Une bande d'antihéros cabossés doit apprendre à faire équipe, dans un film plus intimiste centré sur leurs blessures."]
 ]],
@@ -840,7 +839,8 @@ const P=[
 ["Deadpool",2016,"1h48",8.0,"Un ancien soldat défiguré par une expérience devient le mercenaire bavard Deadpool. Un antihéros bavard et irrévérencieux brise le quatrième mur dans une comédie d'action très violente."],
 ["Deadpool 2",2018,"1h59",7.6,"Deadpool forme une équipe de mutants pour protéger un jeune garçon menacé par un voyageur du temps. Deadpool monte l'équipe X-Force pour protéger un jeune mutant, entre humour noir et action décomplexée."],
 ["Les Nouveaux Mutants",2020,"1h34",5.7,"Un groupe de jeunes mutants internés dans un hôpital psychiatrique isolé affronte des peurs devenues réelles. Un film d'horreur adolescent où de jeunes mutants, retenus dans un hôpital isolé, affrontent leurs peurs les plus profondes."],
-["Logan",2017,"2h17",8.1,"Un Wolverine vieillissant protège une jeune mutante traquée dans un futur sombre. Un western crépusculaire, sombre et poignant, qui montre un Wolverine vieillissant chargé de protéger une jeune mutante."]
+["Logan",2017,"2h17",8.1,"Un Wolverine vieillissant protège une jeune mutante traquée dans un futur sombre. Un western crépusculaire, sombre et poignant, qui montre un Wolverine vieillissant chargé de protéger une jeune mutante."],
+["Deadpool & Wolverine",2024,"2h08",7.6,"Deadpool recrute une version de Wolverine pour sauver son univers de l'effacement. Une aventure déjantée pleine de clins d'œil, qui mêle humour irrévérencieux et hommage aux anciens univers Marvel."]
 ]],
 ["Spider-Man (Sony)",[
 ["Spider-Man",2002,"2h01",7.3,"Peter Parker, mordu par une araignée génétiquement modifiée, devient un justicier masqué. Le film de Sam Raimi pose les bases du héros au cinéma, avec le Bouffon vert comme adversaire."],
@@ -952,7 +952,7 @@ function info(dur){
  m=dur.match(/^(\d+) ép\. · ~?(\d+)min$/);
  const n=+m[1],a=+m[2];return{series:true,n,avg:a,total:n*a};
 }
-const MO=["Captain America : First Avenger", "Captain Marvel", "Iron Man", "Iron Man 2", "L'Incroyable Hulk", "Thor", "Avengers", "Iron Man 3", "Thor : Le Monde des ténèbres", "Captain America : Le Soldat de l'hiver", "Les Gardiens de la Galaxie", "Les Gardiens de la Galaxie Vol. 2", "Daredevil (Netflix)", "Jessica Jones", "Avengers : L'Ère d'Ultron", "Ant-Man", "The Punisher", "Luke Cage", "Iron Fist", "Captain America : Civil War", "Black Widow", "Black Panther", "Spider-Man : Homecoming", "Doctor Strange", "Thor : Ragnarok", "Ant-Man et la Guêpe", "Avengers : Infinity War", "Avengers : Endgame", "WandaVision", "Falcon et le Soldat de l'hiver", "Shang-Chi et la Légende des Dix Anneaux", "Spider-Man : Far From Home", "Loki", "What If...?", "Les Éternels", "Spider-Man : No Way Home", "Hawkeye", "Moon Knight", "Doctor Strange in the Multiverse of Madness", "Thor : Love and Thunder", "Werewolf by Night (spécial)", "Black Panther : Wakanda Forever", "Ms. Marvel", "Ironheart", "Les Gardiens de la Galaxie Vol. 3", "Ant-Man et la Guêpe : Quantumania", "The Marvels", "Deadpool & Wolverine", "Agatha All Along", "Daredevil : Born Again", "Captain America : Brave New World", "Thunderbolts*", "Les Quatre Fantastiques : Premiers pas", "Wonder Man", "Spider-Man : Brand New Day", "Avengers : Doomsday (à venir)"];
+const MO=["Captain America : First Avenger", "Captain Marvel", "Iron Man", "Iron Man 2", "L'Incroyable Hulk", "Thor", "Avengers", "Iron Man 3", "Thor : Le Monde des ténèbres", "Captain America : Le Soldat de l'hiver", "Les Gardiens de la Galaxie", "Les Gardiens de la Galaxie Vol. 2", "Daredevil (Netflix)", "Jessica Jones", "Avengers : L'Ère d'Ultron", "Ant-Man", "The Punisher", "Luke Cage", "Iron Fist", "Captain America : Civil War", "Black Widow", "Black Panther", "Spider-Man : Homecoming", "Doctor Strange", "Thor : Ragnarok", "Ant-Man et la Guêpe", "Avengers : Infinity War", "Avengers : Endgame", "WandaVision", "Falcon et le Soldat de l'hiver", "Shang-Chi et la Légende des Dix Anneaux", "Spider-Man : Far From Home", "Loki", "What If...?", "Les Éternels", "Spider-Man : No Way Home", "Hawkeye", "Moon Knight", "Doctor Strange in the Multiverse of Madness", "Thor : Love and Thunder", "Werewolf by Night (spécial)", "Black Panther : Wakanda Forever", "Ms. Marvel", "Ironheart", "Les Gardiens de la Galaxie Vol. 3", "Ant-Man et la Guêpe : Quantumania", "The Marvels", "Agatha All Along", "Daredevil : Born Again", "Captain America : Brave New World", "Thunderbolts*", "Les Quatre Fantastiques : Premiers pas", "Wonder Man", "Spider-Man : Brand New Day", "Avengers : Doomsday (à venir)"];
 const GRP=new Set(["Avengers","Avengers : L'Ère d'Ultron","Captain America : Civil War","Les Gardiens de la Galaxie","Les Gardiens de la Galaxie Vol. 2","Les Gardiens de la Galaxie Vol. 3","Avengers : Infinity War","Avengers : Endgame","Les Éternels","The Marvels","Deadpool & Wolverine","Thunderbolts*","Les Quatre Fantastiques : Premiers pas","Avengers : Doomsday (à venir)","X-Men","X-Men 2","X-Men : L'Affrontement final","X-Men : Le Commencement","X-Men : Days of Future Past","X-Men : Apocalypse","X-Men : Dark Phoenix","Les Nouveaux Mutants","Les 4 Fantastiques","Les 4 Fantastiques et le Surfer d'argent","Les Quatre Fantastiques (Fant4stic)","Falcon et le Soldat de l'hiver","What If...?","Agatha All Along","The Defenders"]);
 // saisons : liste de titres d'épisodes (null = titre pas encore renseigné) ou nombre d'épisodes
 const SE={
@@ -1300,23 +1300,23 @@ rnd.onclick=()=>{const pool=flat.filter(x=>!s[x.title]&&x.rating!=null);
  toast("◎ "+it.title+" · "+(it.series?it.n+" ép.":it.dur)+" · "+it.rating.toFixed(1)+"/10")};
 // Outils : thème, sauvegarde, restauration
 const NRM=t=>t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-const CORE=new Set(["mcu","mcu_ep","mcu_pr","mcu_po","mcu_wl","mcu_pseudo","mcu_lastbk"]);
-const bk=()=>{const ls={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^mcu_[a-z0-9_]+$/.test(k)&&!CORE.has(k))ls[k]=localStorage.getItem(k)}localStorage.setItem("mcu_lastbk",String(Date.now()))}catch(e){}return JSON.stringify({v:5,s,ep,pr,po,wl,pseudo,ls})};
+const CORE=new Set(["mcu","mcu_ep","mcu_pr","mcu_po","mcu_wl","mcu_pseudo","mcu_lastbk","mcu_auto","mcu_bkcount","mcu_nudge"]);
+const bk=()=>{const ls={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^mcu_[a-z0-9_]+$/.test(k)&&!CORE.has(k))ls[k]=localStorage.getItem(k)}localStorage.setItem("mcu_lastbk",String(Date.now()));localStorage.setItem("mcu_bkcount",String(stateCount()))}catch(e){}return JSON.stringify({v:5,s,ep,pr,po,wl,pseudo,ls})};
 setTimeout(()=>{try{if(Object.keys(s).length&&Date.now()-(+localStorage.getItem("mcu_lastbk")||0)>2592e6)toast("💾 Pense à télécharger une sauvegarde (rien n'a été sauvegardé depuis 30 j)")}catch(e){}},5000);
 const tools=el("div","tools");
-tools.innerHTML='<button id="thm" type="button">◐ Thème</button><button id="exp" type="button">⧉ Copier la sauvegarde</button><button id="dl" type="button">⤓ Télécharger la sauvegarde</button><button id="imp" type="button">⤒ Restaurer</button><input id="fi" type="file" accept=".json,application/json"><textarea id="bk" hidden placeholder="Colle ici ta sauvegarde puis appuie à nouveau sur Restaurer"></textarea>';
+tools.innerHTML='<button id="thm" type="button">◐ Thème</button><button id="exp" type="button">⧉ Copier la sauvegarde</button><button id="dl" type="button">⤓ Télécharger la sauvegarde</button><button id="imp" type="button">⤒ Restaurer</button><button id="snp" type="button">⟲ Dernier instantané</button><input id="fi" type="file" accept=".json,application/json"><textarea id="bk" hidden placeholder="Colle ici ta sauvegarde puis appuie à nouveau sur Restaurer"></textarea>';
 $("reset").after(tools);
 $("thm").onclick=()=>{const n=isDark()?"light":"dark";R0.dataset.theme=n;document.querySelector("meta[name=theme-color]").content=n==="dark"?"#04080f":"#eaf2f8";try{localStorage.setItem("mcu_theme",n)}catch(e){}};
 $("exp").onclick=async()=>{const j=bk();
  try{await navigator.clipboard.writeText(j);toast("Sauvegarde copiée. Garde-la dans tes notes.")}
  catch(e){const b=$("bk");b.hidden=false;b.value=j;b.select();toast("Copie manuelle : sélectionne le texte")}};
 /* Fenêtre de confirmation HUD (remplace confirm()) : « Annuler » est focalisé par défaut, Échap / clic extérieur annulent */
-function hudConfirm(title,msg,okLabel,onOk,danger){
+function hudConfirm(title,msg,okLabel,onOk,danger,noLabel){
  if($("cfBox"))return;
  const ov=el("div","pz-ov");ov.id="cfBox";ov.setAttribute("role","alertdialog");ov.setAttribute("aria-modal","true");ov.setAttribute("aria-labelledby","cf-t");ov.setAttribute("aria-describedby","cf-m");
  const card=el("div","pz-card"),h=el("h2",undefined,title);h.id="cf-t";
  const p=el("pre",undefined,msg);p.id="cf-m";
- const row=el("div","pz-row"),no=el("button","pz-cancel","Annuler"),ok=el("button","pz-go"+(danger?" pz-danger":""),okLabel||"Confirmer");
+ const row=el("div","pz-row"),no=el("button","pz-cancel",noLabel||"Annuler"),ok=el("button","pz-go"+(danger?" pz-danger":""),okLabel||"Confirmer");
  no.type="button";ok.type="button";
  const prev=document.activeElement,close=()=>{document.removeEventListener("keydown",kd,true);ov.remove();try{prev&&prev.focus&&prev.focus()}catch(e){}};
  const kd=e=>{if(e.key==="Escape"){e.preventDefault();close()}else if(e.key==="Tab"){const b=[no,ok],i=b.indexOf(document.activeElement);e.preventDefault();b[(i+(e.shiftKey?-1:1)+2)%2].focus()}};
@@ -1344,6 +1344,7 @@ function vetBk(o){
  else if(total>=4&&dropped/total>.5)reason="plus de la moitié des titres sont inconnus ("+dropped+"/"+total+")";
  return{ok:!reason,reason,clean,dropped,total,seen:Object.keys(clean.s).length,rated:Object.keys(clean.pr).length}}
 function applyBk(o,v){
+ autoSnap(true);
  s=v.clean.s;ep=v.clean.ep;pr=v.clean.pr;po=v.clean.po;wl=v.clean.wl;
  if(typeof o.pseudo==="string"&&cleanName(o.pseudo).length>=2){pseudo=cleanName(o.pseudo);try{localStorage.setItem("mcu_pseudo",pseudo)}catch(e){}}
  save();render();$("bk").hidden=true;
@@ -1357,6 +1358,34 @@ function loadBk(txt){
  const has=Object.keys(s).length||Object.keys(ep).length||Object.keys(pr).length;
  if(!has){applyBk(o,v);return}
  hudConfirm("Restaurer cette sauvegarde ?","Elle contient "+v.seen+" titre(s) vu(s) et "+v.rated+" note(s)"+(v.dropped?"\n"+v.dropped+" entrée(s) à titre inconnu seront ignorées":"")+".\nTa progression actuelle sera remplacée ("+Object.keys(s).length+" titre(s) vu(s), "+Object.keys(pr).length+" note(s)).","Restaurer",()=>applyBk(o,v),true)}
+/* Sauvegarde automatique : 3 instantanés locaux tournants (avant reset / import / retour, puis toutes les 10 min si ça a changé).
+   Ils protègent d'une fausse manœuvre, PAS d'un vidage du navigateur : seul un fichier exporté protège de ça, d'où le rappel ci-dessous. */
+const AUTO_K="mcu_auto";
+function stateCount(){return Object.keys(s).length+Object.keys(pr).length+Object.values(ep).reduce((a,v)=>a+(Array.isArray(v)?v.length:0),0)}
+const sigOf=d=>JSON.stringify([d.s||{},d.ep||{},d.pr||{},d.po||{},d.wl||{}]);
+function autoList(){try{const a=JSON.parse(localStorage.getItem(AUTO_K)||"[]");return Array.isArray(a)?a.filter(x=>x&&isObj(x.d)&&isFinite(x.t)):[]}catch(e){return[]}}
+function autoSnap(force){
+ if(!stateCount())return false;
+ const cur={s,ep,pr,po,wl},sg=sigOf(cur),a=autoList();
+ if(!force&&a.length&&Date.now()-a[0].t<6e5)return false;
+ if(a.length&&sigOf(a[0].d)===sg)return false;
+ const rest=a.filter(x=>sigOf(x.d)!==sg);
+ try{localStorage.setItem(AUTO_K,JSON.stringify([{t:Date.now(),d:JSON.parse(JSON.stringify(cur))},...rest].slice(0,3)));return true}catch(e){return false}}
+function nudge(){
+ try{if($("cfBox")||$("pseudoBox"))return false;
+  const gain=stateCount()-(+localStorage.getItem("mcu_bkcount")||0),nt=+localStorage.getItem("mcu_nudge")||0;
+  if(gain<10||Date.now()-nt<864e5)return false;
+  localStorage.setItem("mcu_nudge",String(Date.now()));
+  hudConfirm("Pense à sauvegarder","Tu as avancé de "+gain+" élément(s) (titres, épisodes, notes) depuis ta dernière sauvegarde exportée.\nLe navigateur peut vider son stockage : un fichier téléchargé est la seule vraie protection.","Télécharger",()=>$("dl").click(),false,"Plus tard");return true}catch(e){return false}}
+$("snp").onclick=()=>{
+ const sg=sigOf({s,ep,pr,po,wl}),x=autoList().find(y=>sigOf(y.d)!==sg);
+ if(!x){toast("Aucun instantané différent de ton état actuel");return}
+ const v=vetBk(x.d);if(!v.ok){toast("Instantané illisible : "+v.reason);return}
+ hudConfirm("Revenir à un instantané ?","Instantané du "+new Date(x.t).toLocaleString("fr-FR")+" : "+v.seen+" titre(s) vu(s), "+v.rated+" note(s).\nTon état actuel est mis de côté avant : un second appui te ramène à lui.","Revenir",()=>{autoSnap(true);applyBk({},v)},false)};
+try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+setInterval(()=>{if(document.hidden)return;autoSnap(false);nudge()},3e4);
+document.addEventListener("visibilitychange",()=>{if(document.hidden)autoSnap(false)});
+setTimeout(()=>{autoSnap(false)},4000);
 $("imp").onclick=()=>{const b=$("bk");if(!b.hidden&&b.value.trim())return loadBk(b.value);$("fi").click()};
 $("fi").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>loadBk(r.result);r.readAsText(f);e.target.value=""};
 $("dl").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([bk()],{type:"application/json"}));a.download="vark-sauvegarde-"+new Date().toISOString().slice(0,10)+".json";document.body.append(a);a.click();a.remove();toast("Sauvegarde téléchargée")};
@@ -1411,7 +1440,11 @@ const PRE={
 "Black Panther : Wakanda Forever":["Black Panther"],
 "Ant-Man et la Guêpe : Quantumania":["Ant-Man et la Guêpe"],
 "Les Gardiens de la Galaxie Vol. 3":["Les Gardiens de la Galaxie Vol. 2"],
-"The Marvels":["Captain Marvel","WandaVision"],
+"The Marvels":["Captain Marvel","WandaVision","Ms. Marvel"],
+"Captain America : Brave New World":["Falcon et le Soldat de l'hiver"],
+"Daredevil : Born Again":["Daredevil (Netflix)"],
+"Deadpool & Wolverine":["Deadpool","Deadpool 2","Logan"],
+"Thunderbolts*":["Black Widow","Falcon et le Soldat de l'hiver"],
 "Avengers : Doomsday (à venir)":["Avengers : Endgame","Spider-Man : No Way Home"]};
 const PLATS=["Disney+","Prime Video","Netflix","Canal+","Max"];
 let subs=new Set(),PLm={},PL={};
@@ -2062,7 +2095,7 @@ if(hc&&!RM)hc.addEventListener("pointermove",e=>{const r=hc.getBoundingClientRec
 /* puce pseudo : toucher pour modifier */
 $("hs-op").onclick=()=>askPseudo(true);
 /* correctif : le message de confirmation annonçait « décocher » mais effaçait aussi les notes */
-$("reset").onclick=()=>hudConfirm("Tout remettre à zéro ?","Tout décocher et effacer tes notes ?\nTa liste « Plus tard » est conservée.","Effacer",()=>{s={};ep={};pr={};po={};save();render();toast("Progression remise à zéro")},true);
+$("reset").onclick=()=>hudConfirm("Tout remettre à zéro ?","Tout décocher et effacer tes notes ?\nTa liste « Plus tard » est conservée.","Effacer",()=>{autoSnap(true);s={};ep={};pr={};po={};save();render();toast("Progression remise à zéro · « ⟲ Dernier instantané » pour annuler")},true);
 /* démarrage (une fois par session) */
 const go=()=>{H.classList.add("go");cu();rvScan()};
 let booted=false;try{booted=!!sessionStorage.getItem("vk_boot")}catch(e){}
@@ -2133,6 +2166,23 @@ window.VKTEST=function(silent){
   T("Goûts : une série fortement notée remonte ses voisines",()=>{reset();["Iron Man","Thor","Avengers","Black Panther","Loki","WandaVision","Captain America : First Avenger"].forEach(t=>{if(byT.has(t)){s[t]=1;pr[t]=9}});C.rG=100;const m=model();return(m.cands.length>0&&m.cands.every(c=>isFinite(c.score)))||"score non fini"});
   /* --- ordre chronologique : Falcon juste après WandaVision --- */
   [["MO",MO],["VO",VO],["VOA",VOA]].forEach(([n,a])=>T("Falcon juste après WandaVision ("+n+")",()=>{const i=a.indexOf("WandaVision");return a[i+1]==="Falcon et le Soldat de l'hiver"||"trouvé après : "+a[i+1]}));
+  T("Deadpool & Wolverine : catégorie X-Men, 14e place",()=>{const x=byT.get("Deadpool & Wolverine"),g=[...byT.values()].filter(y=>y.group===x.group);return(/X-Men/.test(x.group)&&g.indexOf(x)===13&&g.length===14)||x.group+" #"+(g.indexOf(x)+1)});
+  /* --- prérequis ajoutés --- */
+  [["Captain America : Brave New World",["Falcon et le Soldat de l'hiver"]],["Daredevil : Born Again",["Daredevil (Netflix)"]],["The Marvels",["Ms. Marvel","Captain Marvel"]],["Deadpool & Wolverine",["Deadpool","Deadpool 2","Logan"]],["Thunderbolts*",["Black Widow","Falcon et le Soldat de l'hiver"]]].forEach(([k,q])=>
+   T("Prérequis directs : "+k,()=>{reset();const n=needOf(k);const m=q.filter(z=>!n.includes(z));return m.length?"manque : "+m.join(", "):true}));
+  T("Brave New World exige aussi Endgame (via Falcon)",()=>{reset();return needOf("Captain America : Brave New World").includes(EG)});
+  T("Falcon vu : Brave New World ne l'exige plus",()=>{reset();mark("Falcon et le Soldat de l'hiver");return!needOf("Captain America : Brave New World").includes("Falcon et le Soldat de l'hiver")});
+  /* --- cohérence des données --- */
+  T("Données : titres uniques",()=>{const c={};flat.forEach(x=>c[x.title]=(c[x.title]||0)+1);const d=Object.keys(c).filter(k=>c[k]>1);return d.length?"doublons : "+d.join(", "):true});
+  T("Données : listes MO/VO/VOA sans doublon",()=>{const m=[];[["MO",MO],["VO",VO],["VOA",VOA]].forEach(([n,a])=>{const u=new Set(a);if(u.size!==a.length)m.push(n)});return m.length?"doublons dans "+m.join(", "):true});
+  T("Données : notes des fans entre 0 et 10 (ou absentes)",()=>{const m=flat.filter(x=>x.rating!=null&&!(typeof x.rating==="number"&&x.rating>=0&&x.rating<=10)).map(x=>x.title);return m.length?m.join(", "):true});
+  T("Séries : chaque saison a un titre pour tous ses épisodes",()=>{const m=[];flat.filter(x=>x.series).forEach(x=>x.ss.forEach((se,i)=>se.forEach((e,j)=>{if(!e)m.push(x.title+" "+(i+1)+"."+(j+1))})));return m.length?m.slice(0,6).join(", ")+(m.length>6?" … (+"+(m.length-6)+")":""):true});
+  /* lacunes connues (notes à renseigner) : retire un titre de cette liste une fois ses notes ajoutées */
+  const NO_EP_RATINGS=["Ms. Marvel","Ironheart"];
+  T("Séries : chaque épisode a une note (hors lacunes connues)",()=>{const m=[];flat.filter(x=>x.series&&!NO_EP_RATINGS.includes(x.title)).forEach(x=>x.ss.forEach((se,i)=>se.forEach((e,j)=>{if(x.er[(i+1)+"."+(j+1)]==null)m.push(x.title+" "+(i+1)+"."+(j+1))})));return m.length?m.slice(0,6).join(", ")+(m.length>6?" … (+"+(m.length-6)+")":""):true});
+  T("Lacunes connues toujours vraies (sinon, retire-les de la liste)",()=>{const m=NO_EP_RATINGS.filter(n=>{const x=byT.get(n);return x&&Object.keys(x.er).length>0});return m.length?m.join(", ")+" ont maintenant des notes":true});
+  T("Séries : notes d'épisodes entre 0 et 10, sans clé orpheline",()=>{const m=[];flat.filter(x=>x.series).forEach(x=>Object.entries(x.er).forEach(([k,v])=>{const[a,b]=k.split(".").map(Number);if(!(typeof v==="number"&&v>=0&&v<=10))m.push(x.title+" "+k+"="+v);else if(!x.ss[a-1]||b<1||b>x.ss[a-1].length)m.push(x.title+" "+k+" hors saison")}));return m.length?m.slice(0,6).join(", "):true});
+  T("Séries : le nombre d'épisodes affiché correspond aux saisons",()=>{const m=flat.filter(x=>x.series&&x.n!==x.ss.reduce((a,se)=>a+se.length,0)).map(x=>x.title+" ("+x.n+" ≠ "+x.ss.reduce((a,se)=>a+se.length,0)+")");return m.length?m.join(", "):true});
   T("Falcon : 6 épisodes nommés et notés",()=>{const x=byT.get("Falcon et le Soldat de l'hiver");return(x&&x.series&&x.ss[0].length===6&&x.ss[0].every(Boolean)&&Object.keys(x.er).length===6)||"données incomplètes"});
   T("Tout titre de MO/VO/VOA existe dans les données",()=>{const m=[...MO,...VO,...VOA].filter(t=>!byT.has(t));return m.length?[...new Set(m)].join(", "):true});
   /* --- import de sauvegarde --- */
