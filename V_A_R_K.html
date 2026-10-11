@@ -329,6 +329,55 @@ li.wl .t::after{content:" 🔖";font-size:.8em}
 .lt-a button{padding:8px 12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 .78rem "Inter",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
 .lt-a .go{background:var(--cy);border-color:var(--cy);color:var(--on)}
 .tabs button[data-f=later][aria-pressed=true]{background:linear-gradient(135deg,var(--am),#ff7a3d);color:#1a0d00}
+
+/* ===== Onglet « En cours » (séries en visionnage) ===== */
+#wv{display:none;padding-top:22px}main[data-f=watching] #wv{display:block}main[data-f=watching] #list{display:none}
+#wv ul{list-style:none;margin:0;padding:0}
+.wa-r{padding:12px;border-bottom:1px solid var(--line)}
+.wa-h{display:flex;align-items:baseline;gap:10px;justify-content:space-between}
+.wa-h .t{font-weight:700;font-size:1.02rem}
+.wa-h .pc{flex:none;font:700 .95rem "Rajdhani","Inter",sans-serif;letter-spacing:.04em;color:var(--cy);font-variant-numeric:tabular-nums}
+.wa-r .sub{display:block;margin-top:2px;font-size:.78rem;color:var(--mut)}
+.wa-bar{height:6px;margin:10px 0 8px;background:var(--line);overflow:hidden}
+.wa-bar i{display:block;height:100%;width:var(--p,0%);background:linear-gradient(90deg,var(--cy),var(--cy2));box-shadow:0 0 10px var(--glow);animation:waFill 700ms ease-out}
+@keyframes waFill{from{width:0}}
+.wa-nx{margin:0;font-size:.88rem}
+.wa-nx b{color:var(--cy)}
+.wa-a{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.wa-a button{padding:8px 12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 .78rem "Inter",sans-serif;letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.wa-a .go{background:var(--cy);border-color:var(--cy);color:var(--on)}
+.tabs button[data-f=watching][aria-pressed=true]{background:linear-gradient(135deg,var(--cy),var(--cy2));color:var(--on);box-shadow:0 0 14px var(--glow)}
+
+/* En cours v2 : tuiles, tri, frise d'épisodes, pause */
+#wv .st-tiles{margin-bottom:12px}
+#wv .rc-pills{margin:0 0 12px}
+.wa-r{position:relative}
+.wa-r .sub b{color:var(--cy);font-weight:600}
+.wa-ss{display:grid;gap:5px;margin:10px 0 8px}
+.wa-s{display:flex;align-items:center;gap:8px}
+.wa-s small{flex:none;min-width:28px;font:600 .72rem "Rajdhani","Inter",sans-serif;letter-spacing:.08em;color:var(--mut)}
+.wa-d{display:flex;flex-wrap:wrap;gap:3px}
+.wa-d button{width:16px;height:16px;padding:0;border:1px solid var(--line);background:transparent;cursor:pointer;transition:background 200ms,box-shadow 200ms}
+.wa-d button:hover{border-color:var(--cy)}
+.wa-d button.on{background:var(--cy);border-color:var(--cy);box-shadow:0 0 6px var(--glow)}
+.wa-d button.nx{border-color:var(--am);box-shadow:0 0 8px rgba(255,150,60,.55)}
+@media (pointer:coarse){.wa-d button{width:22px;height:22px}}
+.wa-nx .fan{display:inline-block;margin-left:8px;padding:1px 7px;color:#04121c;font-weight:700;font-size:.76rem;vertical-align:1px}
+.wa-p{margin-top:18px;border:1px solid var(--line);background:var(--panel)}
+.wa-p summary{padding:10px 12px;cursor:pointer;font:600 .9rem "Rajdhani","Inter",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+.wa-p .wa-r{border-bottom:0;border-top:1px solid var(--line)}
+.wa-p .wa-h .t{font-weight:600;color:var(--mut)}
+/* barre de contrôle plus large que la liste, sans étirement : onglets sur une ligne */
+@media (min-width:760px) and (max-width:1099px){.bar .wrap{max-width:none}.tabs button{white-space:nowrap;font-size:.86rem;letter-spacing:.04em;padding:9px 5px}}
+@media (min-width:1100px){
+.bar .wrap{max-width:1120px}
+.bar .ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.bar .tabs{order:1;flex:1 1 100%;min-width:0;width:auto;grid-column:auto}
+.bar .tabs button{flex:1 1 auto;white-space:nowrap;padding:10px 14px}
+.bar #sortSel{order:2;flex:0 0 330px;width:auto;min-width:0}
+.bar #q{order:3;flex:1 1 280px;min-width:0;grid-column:auto}
+.bar #rnd{order:4;flex:none}
+}
 @media (max-width:640px){.tabs{overflow-x:auto;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.tabs button{flex:0 0 auto;padding:9px 11px;white-space:nowrap;font-size:.82rem}}
 /* ===== V6 : « Mon top » — dégradés continus, sobres et lisibles ===== */
 #rank li{border-left-color:var(--c);
@@ -476,7 +525,7 @@ html.go .stats div:nth-child(1){animation-delay:748ms}html.go .stats div:nth-chi
 .pz-ov{animation:fadein 425ms ease-out}.pz-card{animation:zin 680ms cubic-bezier(.2,1.2,.4,1)}
 .pz-card input:focus{border-color:var(--cy);box-shadow:0 0 16px var(--glow)}
 /* contenu */
-#list,#rank,#reco,#stv,#lv{animation:tabin 680ms ease-out}
+#list,#rank,#reco,#stv,#lv,#wv{animation:tabin 680ms ease-out}
 .rv{opacity:0;transform:translateY(8px);transition:opacity 630ms ease,transform 630ms ease}
 .rv.rv-in{opacity:1;transform:none}
 .panel:not([hidden]),.epl:not([hidden]),.rp:not([hidden]){animation:unfold 476ms ease-out}
@@ -743,10 +792,21 @@ li:hover{background:color-mix(in srgb,var(--hi) 55%,transparent)}li.done:hover{b
 #reco .gg-ticks span:nth-child(1){--i:0}#reco .gg-ticks span:nth-child(2){--i:1}#reco .gg-ticks span:nth-child(3){--i:2}#reco .gg-ticks span:nth-child(4){--i:3}#reco .gg-ticks span:nth-child(5){--i:4}
 #reco .gg-ticks span.on{color:var(--cy);text-shadow:0 0 10px var(--glow)}
 #reco .gg-ticks span.on::before{background:var(--cy);height:9px;box-shadow:0 0 8px var(--cy)}
+/* ===== Barre de contrôle plus haute + onglet « En cours » sans espacement entre les lettres ===== */
+.bar{padding:20px 0 22px}
+.bar .track{margin:13px 0 11px}
+.bar .tl{margin:0 0 16px}
+.bar .ctrl{gap:12px}
+.bar .tabs{padding:5px}
+.bar .tabs button{padding-top:17px;padding-bottom:17px}
+.bar #sortSel,.bar #q,.bar #rnd{height:56px}
+.bar .tabs #tabWatch{letter-spacing:0;word-spacing:0}
 </style>
 </head>
 <body>
 <noscript><p style="padding:20px;text-align:center">V.A.R.K a besoin de JavaScript pour fonctionner.</p></noscript>
+<div class="boot" id="boot" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor"><circle class="rg" cx="32" cy="32" r="30" stroke-width="1.5" stroke-dasharray="3 5"/><g transform="translate(8 8)"><path d="M24 3l18 10.5v21L24 45 6 34.5v-21z" stroke-width="2"/><path d="M14 17l10 16 10-16" stroke-width="3" stroke-linecap="square"/></g></svg><div class="bt">V.A.R.K // initialisation</div><div class="bl"><i></i></div></div>
+<script>(()=>{try{var t=localStorage.getItem("mcu_theme");if(t)document.documentElement.dataset.theme=t}catch(e){}var b=false;try{b=!!sessionStorage.getItem("vk_boot")}catch(e){}if(window.VKRM||b){var e=document.getElementById("boot");if(e)e.remove()}})();</script>
 <header class="hero"><div class="wrap"><div class="hero-card">
 <div class="hero-grid">
 <div class="hl"><div class="stat-tag"><p class="tag">Système actif</p><p class="tele">V.A.R.K // en ligne</p></div>
@@ -762,7 +822,7 @@ li:hover{background:color-mix(in srgb,var(--hi) 55%,transparent)}li.done:hover{b
 <div class="top"><div class="big"><span id="k">0</span> <small id="of"></small></div><span class="pct" id="pct"></span></div>
 <div class="track"><div class="fill" id="fill"></div></div>
 <div class="ctrl">
-<div class="tabs" id="tabs"><button data-f="all" aria-pressed="true">Tout</button><button data-f="todo" aria-pressed="false">À voir</button><button data-f="seen" aria-pressed="false">Vus</button><button data-f="rank" aria-pressed="false">★ Mon top</button><button data-f="reco" aria-pressed="false">✦ Pour toi</button><button data-f="stats" aria-pressed="false">▤ Stats</button><button data-f="later" aria-pressed="false" id="tabLater">🔖 Plus tard</button></div>
+<div class="tabs" id="tabs"><button data-f="all" aria-pressed="true">Tout</button><button data-f="todo" aria-pressed="false">À voir</button><button data-f="seen" aria-pressed="false">Vus</button><button data-f="watching" aria-pressed="false" id="tabWatch">▶ En cours</button><button data-f="rank" aria-pressed="false">★ Mon top</button><button data-f="reco" aria-pressed="false">✦ Pour toi</button><button data-f="stats" aria-pressed="false">▤ Stats</button><button data-f="later" aria-pressed="false" id="tabLater">🔖 Plus tard</button></div>
 <select id="sortSel" aria-label="Trier">
 <option value="univers">Trier : par univers</option>
 <option value="vision">Trier : ordre de visionnage</option>
@@ -944,6 +1004,11 @@ const save=()=>{try{localStorage.setItem("mcu",JSON.stringify(s));localStorage.s
 const sa=(()=>{try{return JSON.parse(localStorage.getItem("mcu_sa")||"{}")||{}}catch(e){return{}}})();
 const markSa=(t,on)=>{on?sa[t]=Date.now():delete sa[t];try{localStorage.setItem("mcu_sa",JSON.stringify(sa))}catch(e){}};
 const saveSort=()=>{try{localStorage.setItem("mcu_sort",sort)}catch(e){}};
+/* séries « en cours » : wa = ajout manuel (aucun épisode coché), wt = dernier avancement */
+let wa={},wt={};try{wa=JSON.parse(localStorage.getItem("mcu_wa")||"{}")||{}}catch(e){}try{wt=JSON.parse(localStorage.getItem("mcu_wt")||"{}")||{}}catch(e){}let wp={};try{wp=JSON.parse(localStorage.getItem("mcu_wp")||"{}")||{}}catch(e){}
+const saveWa=()=>{try{localStorage.setItem("mcu_wa",JSON.stringify(wa))}catch(e){}};
+const saveWt=()=>{try{localStorage.setItem("mcu_wt",JSON.stringify(wt))}catch(e){}};
+const saveWp=()=>{try{localStorage.setItem("mcu_wp",JSON.stringify(wp))}catch(e){}};
 const fmt=m=>m==null?"—":Math.floor(m/60)+"h"+String(m%60).padStart(2,"0");
 function info(dur){
  let m=dur.match(/^(\d+)h(\d+)$/);
@@ -1052,8 +1117,11 @@ function makeLi(it){
  const wb=el("button","wlb");wb.type="button";
  const wsync=()=>{const on=!!wl[it.title];wb.textContent=on?"🔖 Dans ma liste · Retirer":"＋ À voir plus tard";li.classList.toggle("wl",on)};
  wb.onclick=()=>{wl[it.title]?delete wl[it.title]:wl[it.title]=Date.now();wsync();save();rk()};wsync();
- panel.append(p,el("p",undefined,it.desc),tn,wb);
- xp.onclick=()=>{panel.hidden=!panel.hidden;xp.setAttribute("aria-expanded",String(!panel.hidden));};
+ const wtb=el("button","wlb");wtb.type="button";
+ const wtsync=()=>{if(!it.series||s[it.title]||(ep[it.title]||[]).length){wtb.hidden=true;return}wtb.hidden=false;wtb.textContent=wa[it.title]?"▶ En cours · Retirer":"▶ Je commence cette série"};
+ wtb.onclick=()=>{wa[it.title]?delete wa[it.title]:wa[it.title]=Date.now();saveWa();wtsync();upd()};wtsync();
+ panel.append(p,el("p",undefined,it.desc),tn,wb,wtb);
+ xp.onclick=()=>{panel.hidden=!panel.hidden;xp.setAttribute("aria-expanded",String(!panel.hidden));wtsync();};
  const els=[l];
  let epl=null,cnt=null,boxes=[];
  if(it.series){
@@ -1212,7 +1280,7 @@ let tt;function toast(m){let t=$("toast");if(!t){t=el("div","toast");t.id="toast
 try{const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" fill="#04080f"/><circle cx="256" cy="256" r="190" fill="none" stroke="#4fd8ff" stroke-width="10" stroke-dasharray="14 22"/><text x="256" y="330" font-family="Arial Black,sans-serif" font-size="230" font-weight="900" text-anchor="middle" fill="#4fd8ff">V</text></svg>';
 const ic="data:image/svg+xml,"+encodeURIComponent(svg);
 const lk=document.createElement("link");lk.rel="icon";lk.href=ic;document.head.append(lk);
-$("mf").href=URL.createObjectURL(new Blob([JSON.stringify({name:"V.A.R.K · Suivi Marvel & DC",short_name:"V.A.R.K",display:"standalone",background_color:"#04080f",theme_color:"#04080f",start_url:location.href,icons:[{src:ic,sizes:"512x512",type:"image/svg+xml",purpose:"any"}]})],{type:"application/manifest+json"}))}catch(e){}
+$("mf").href=URL.createObjectURL(new Blob([JSON.stringify({name:"V.A.R.K · Suivi Marvel & DC",short_name:"V.A.R.K",display:"fullscreen",display_override:["fullscreen","standalone"],background_color:"#04080f",theme_color:"#04080f",start_url:location.href,icons:[{src:ic,sizes:"512x512",type:"image/svg+xml",purpose:"any"}]})],{type:"application/manifest+json"}))}catch(e){}
 // Thème clair / sombre
 const R0=document.documentElement;
 try{const t=localStorage.getItem("mcu_theme");if(t)R0.dataset.theme=t}catch(e){}
@@ -1946,6 +2014,88 @@ function drawStats(){
  stv.append(up);statsMore(rated)}
 $("tabs").addEventListener("click",()=>{draw();drawStats();drawLater()});
 drawLater();
+
+/* ===== Onglet « ▶ En cours » : séries commencées mais pas terminées ===== */
+const tabW=$("tabWatch"),wv=el("div","wrap");wv.id="wv";lv.after(wv);
+const isWatching=x=>x.series&&!s[x.title]&&!wp[x.title]&&((ep[x.title]||[]).length>0||!!wa[x.title]);
+const waDone=x=>(ep[x.title]||[]).length;
+const waLeft=x=>(x.n-waDone(x))*(x.avg||0);
+const waNext=x=>{const c=ep[x.title]||[];let i=1;while(c.includes(i))i++;return i<=x.n?i:null};
+const waInfo=(x,i)=>{let k=0;for(let a=0;a<x.ss.length;a++)for(let b=0;b<x.ss[a].length;b++){k++;if(k===i)return{s:a+1,e:b+1,name:x.ss[a][b]}}return null};
+const waLab=(x,f)=>(x.ss.length>1?"S"+f.s+" ":"")+"E"+f.e;
+const waAgo=ts=>{if(!ts)return"";const d=Math.floor((new Date().setHours(0,0,0,0)-new Date(+ts).setHours(0,0,0,0))/864e5);return d<=0?"aujourd'hui":d===1?"hier":d<30?"il y a "+d+" j":""};
+let wsort="recent";try{wsort=localStorage.getItem("mcu_wsort")||"recent"}catch(e){}
+if(!["recent","prog","left"].includes(wsort))wsort="recent";
+const WSORT={recent:(a,b)=>(+wt[b.title]||0)-(+wt[a.title]||0)||waDone(b)/b.n-waDone(a)/a.n,prog:(a,b)=>waDone(b)/b.n-waDone(a)/a.n,left:(a,b)=>waLeft(a)-waLeft(b)};
+const waList=()=>flat.filter(isWatching).sort((a,b)=>WSORT[wsort](a,b)||a.title.localeCompare(b.title,"fr"));
+const waSnap={};flat.forEach(x=>{if(x.series)waSnap[x.title]=waDone(x)});
+function waStamp(){let ch=false,cp=false;flat.forEach(x=>{if(!x.series)return;const n=waDone(x),o=waSnap[x.title];if(n!==o){waSnap[x.title]=n;n?wt[x.title]=Date.now():delete wt[x.title];if(n>o&&wp[x.title]){delete wp[x.title];cp=true}ch=true}});if(ch)saveWt();if(cp)saveWp()}
+function waCount(){const n=waList().length;tabW.textContent="▶ En cours"+(n?" ("+n+")":"")}
+/* écrit la nouvelle liste d'épisodes vus, termine la série si tout est vu */
+function waSet(x,list,msg){list=[...new Set(list)].sort((a,b)=>a-b);const fin=list.length>=x.n;
+ list.length?ep[x.title]=list:delete ep[x.title];
+ if(fin){s[x.title]=1;markSa(x.title,true);delete wl[x.title];delete wa[x.title];delete wp[x.title];saveWa();saveWp()}
+ save();render();
+ toast(fin?"🎉 « "+x.title+" » terminée"+(pseudo?", "+pseudo:"")+". Pense à la noter !":msg||"")}
+function waAdvance(x){const nx=waNext(x);if(nx==null)return;const f=waInfo(x,nx);
+ waSet(x,(ep[x.title]||[]).concat(nx),"✓ "+waLab(x,f)+" vu · « "+x.title+" »")}
+function waUndo(x){const c=ep[x.title]||[];if(!c.length)return;const m=Math.max(...c),f=waInfo(x,m);
+ waSet(x,c.filter(v=>v!==m),"↶ "+waLab(x,f)+" retiré · « "+x.title+" »")}
+function waFinish(x){waSet(x,Array.from({length:x.n},(_,i)=>i+1))}
+function waCard(x,paused){
+ const d=waDone(x),pc=Math.round(d/x.n*100),nx=waNext(x),f=nx&&waInfo(x,nx);
+ const li=el("li","wa-r"),h=el("div","wa-h");
+ h.append(el("span","t",x.title),el("span","pc",d+"/"+x.n+" · "+pc+" %"));
+ const ago=waAgo(wt[x.title]);
+ const sub=el("span","sub",x.year+" · "+x.group+" · ~"+hm(waLeft(x))+" restantes"+(ago?" · dernier épisode "+ago:""));
+ li.append(h,sub);
+ if(paused){
+  const act=el("div","wa-a"),r=el("button","go","▶ Reprendre");r.type="button";
+  r.onclick=()=>{delete wp[x.title];saveWp();upd();toast("▶ « "+x.title+" » reprise")};
+  act.append(r);li.append(act);return li}
+ /* frise : un carré par épisode, groupés par saison, cliquables */
+ const ss=el("div","wa-ss");let i=0;
+ x.ss.forEach((sn,si)=>{const row=el("div","wa-s"),dots=el("div","wa-d");
+  if(x.ss.length>1)row.append(el("small",undefined,"S"+(si+1)));
+  sn.forEach((nm,ei)=>{i++;const k=i,on=(ep[x.title]||[]).includes(k),b=el("button",on?"on":(k===nx?"nx":""));b.type="button";
+   b.title="E"+(ei+1)+(nm?" · "+nm:"")+(on?" (vu)":"");b.setAttribute("aria-label","Épisode "+(ei+1)+(x.ss.length>1?" de la saison "+(si+1):"")+(on?", vu":", pas vu"));b.setAttribute("aria-pressed",String(on));
+   b.onclick=()=>{const c=ep[x.title]||[];waSet(x,c.includes(k)?c.filter(v=>v!==k):c.concat(k),(c.includes(k)?"↶ ":"✓ ")+"E"+(ei+1)+(x.ss.length>1?" S"+(si+1):"")+" · « "+x.title+" »")};
+   dots.append(b)});
+  row.append(dots);ss.append(row)});
+ const nxt=el("p","wa-nx");
+ if(f){nxt.append("Prochain : ",el("b",undefined,waLab(x,f)));if(f.name)nxt.append(" · "+f.name);
+  const r=x.er[f.s+"."+f.e];if(r!=null){const fan=el("span","fan",r.toFixed(1));fan.style.background=ratingBg(r);nxt.append(fan)}}
+ const act=el("div","wa-a"),b1=el("button","go","✓ Épisode vu"),b2=el("button",undefined,"↶ Annuler"),b3=el("button",undefined,"Épisodes"),b4=el("button",undefined,"✓ Terminée"),b5=el("button",undefined,"⏸ Pause");
+ [b1,b2,b3,b4,b5].forEach(z=>z.type="button");
+ b1.onclick=()=>waAdvance(x);
+ b2.onclick=()=>waUndo(x);b2.hidden=!d;
+ b3.onclick=()=>{goto(x.title);setTimeout(()=>{const l=findLi(x.title),e=l&&l.querySelector(".ep");if(e&&e.getAttribute("aria-expanded")==="false")e.click()},150)};
+ b4.onclick=()=>waFinish(x);
+ b5.onclick=()=>{wp[x.title]=Date.now();saveWp();upd();toast("⏸ « "+x.title+" » mise en pause")};
+ act.append(b1,b2,b3,b4,b5);
+ if(!d){const b6=el("button",undefined,"Retirer");b6.type="button";b6.onclick=()=>{delete wa[x.title];saveWa();upd()};act.append(b6)}
+ li.append(ss,nxt,act);return li}
+function drawWatching(){
+ if($("main").dataset.f!=="watching")return;
+ wv.innerHTML="";
+ const L=waList(),P2=flat.filter(x=>x.series&&!s[x.title]&&wp[x.title]&&waDone(x)>0).sort((a,b)=>a.title.localeCompare(b.title,"fr"));
+ if(!L.length&&!P2.length){wv.append(el("p","none","Aucune série en cours. Coche un épisode dans la fiche d'une série (bouton des épisodes), ou touche « ▶ Je commence cette série » dans ses détails : elle apparaîtra ici."));return}
+ if(L.length){
+  const left=L.reduce((t,x)=>t+waLeft(x),0),epl=L.reduce((t,x)=>t+x.n-waDone(x),0);
+  let pace=2;try{const v=localStorage.getItem("mcu_st_pace");if(v&&+v>0)pace=+v}catch(e){}
+  const wk=left/60/pace,tl=el("div","st-tiles");
+  [[String(L.length),"Séries en cours"],[String(epl),"Épisodes restants"],[hm(left),"Temps restant"],[left?"≈ "+Math.max(1,Math.ceil(wk))+" sem.":"—","Fin à "+pace+" h / semaine"]].forEach(([b,l])=>{const dv=el("div");dv.append(el("b",undefined,b),el("span",undefined,l));tl.append(dv)});
+  wv.append(tl);
+  const nxs=L.filter(x=>waNext(x)!=null).sort((a,b)=>waLeft(a)-waLeft(b))[0];
+  wv.append(el("p","jarvis","> "+(pseudo?pseudo+", ":"")+L.length+" série"+(L.length>1?"s":"")+" en cours."+(nxs&&L.length>1?" La plus proche de la fin : « "+nxs.title+" » (encore "+hm(waLeft(nxs))+")."  :"")));
+  const pills=el("div","rc-pills");pills.setAttribute("role","group");pills.setAttribute("aria-label","Trier les séries en cours");
+  [["recent","Récentes"],["prog","Plus avancées"],["left","Bientôt finies"]].forEach(([k,l])=>{const b=el("button",undefined,l);b.type="button";b.setAttribute("aria-pressed",String(k===wsort));b.onclick=()=>{wsort=k;try{localStorage.setItem("mcu_wsort",k)}catch(e){}drawWatching()};pills.append(b)});
+  wv.append(pills);
+  const ul=el("ul");L.forEach(x=>ul.append(waCard(x)));wv.append(ul)}
+ if(P2.length){const dt=el("details","wa-p"),sm=el("summary",undefined,"⏸ En pause ("+P2.length+")"),ul=el("ul");P2.forEach(x=>ul.append(waCard(x,true)));dt.append(sm,ul);if(!L.length)dt.open=true;wv.append(dt)}}
+{const _uw=upd;upd=function(){_uw();waStamp();waCount();drawWatching()}}
+$("tabs").addEventListener("click",()=>drawWatching());
+waCount();
 window.VKI={model,needOf,PRE,byT,cfg:{get rG(){return rG},set rG(v){rG=v},get rF(){return rF},set rF(v){rF=v},get rS(){return rS},set rS(v){rS=v},get rD(){return rD},set rD(v){rD=v},get rM(){return rM},set rM(v){rM=v},get dis(){return dis},set dis(v){dis=v}}};
 })();
 
@@ -2092,12 +2242,13 @@ $("reset").onclick=()=>hudConfirm("Tout remettre à zéro ?","Tout décocher et 
 /* démarrage (une fois par session) */
 const go=()=>{H.classList.add("go");cu();rvScan()};
 let booted=false;try{booted=!!sessionStorage.getItem("vk_boot")}catch(e){}
-if(RM||booted)go();
+const b=$("boot");
+if(RM||booted||!b){if(b)b.remove();go()}
 else{try{sessionStorage.setItem("vk_boot","1")}catch(e){}
- const b=document.createElement("div");b.className="boot";b.setAttribute("aria-hidden","true");
- b.innerHTML='<svg viewBox="0 0 64 64" fill="none" stroke="currentColor"><circle class="rg" cx="32" cy="32" r="30" stroke-width="1.5" stroke-dasharray="3 5"/><g transform="translate(8 8)"><path d="M24 3l18 10.5v21L24 45 6 34.5v-21z" stroke-width="2"/><path d="M14 17l10 16 10-16" stroke-width="3" stroke-linecap="square"/></g></svg><div class="bt">V.A.R.K // initialisation</div><div class="bl"><i></i></div>';
- document.body.append(b);
- let d=0;const fin=()=>{if(d)return;d=1;b.classList.add("off");go();setTimeout(()=>b.remove(),1000)};b.style.cursor="pointer";b.onclick=fin;setTimeout(fin,2000)}
+ let d=0;const fin=()=>{if(d)return;d=1;b.classList.add("off");go();setTimeout(()=>b.remove(),1000)};b.style.cursor="pointer";b.onclick=fin;setTimeout(fin,Math.max(300,2000-performance.now()))}
+/* plein écran : tenté dès le lancement, sinon au premier toucher (les navigateurs l'exigent) */
+{const FS=()=>{try{if(document.fullscreenElement||matchMedia("(display-mode: fullscreen)").matches)return;const e=H,f=e.requestFullscreen||e.webkitRequestFullscreen;if(f){const r=f.call(e,{navigationUI:"hide"});if(r&&r.catch)r.catch(()=>{})}}catch(_){}};
+ FS();addEventListener("click",FS,{once:true,capture:true})}
 })();
 </script>
 <script>
